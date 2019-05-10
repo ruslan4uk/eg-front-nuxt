@@ -1,0 +1,110 @@
+html
+	font-size: 16px
+*
+	font-family: 'GothamPro'
+	font-weight: 300
+body
+	font-size: 1rem
+	line-height: 1.4
+
+a, a:hover 
+	text-decoration: none
+	transition: all ease 0.2s
+
+img 
+	max-width: 100%
+
+.border25
+	border-radius: 25px
+
+.block-shadow
+	box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05)
+	transition: all ease 0.3s
+	&-hover:hover
+		box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.1)
+
+
+// btn btn-blue
+.btn
+	color: #ffffff
+	font-weight: 400
+	font-size: 1rem
+	border-radius: 25px
+	padding: 0.5rem 1.75rem
+	border: 1px solid #cccccc
+.btn-blue
+	background-color: $blue
+	&:hover
+		background-color: #fff
+		color: $blue
+.btn-white
+	background-color: #fff
+	color: $blue
+	&:hover
+		background-color: $blue
+		color: #ffffff
+
+.btn-small
+	padding: 0.375rem 1.25rem
+	font-size: 0.875rem
+
+
+.title
+	font-size: 1.25rem
+	font-weight: 400
+	color: #686c71
+.subtitle
+	font-size: 1rem
+	font-weight: 400
+	color: #343940
+
+// Alert
+.alert
+	border-radius: 25px
+	font-size: 0.875rem
+	font-weight: 400
+	&-success 
+		background-color: #edf3ef
+
+// card style
+.card
+	border: 0
+.card-title
+	font-size: 1.5rem
+	font-weight: 400
+.card-subtitle
+	font-size: 1rem
+	font-weight: 400
+.card-title-small
+	color: #c0c0c0
+	font-size: 0.75rem
+	font-weight: 400
+
+// import custom form
+@import 'partials/form'
+
+// import navigation
+@import 'partials/navigation'
+
+// import auth style
+@import 'partials/auth'
+
+// Tour and tour-item style
+@import 'partials/tour'
+
+// Profile user style
+@import 'partials/profile'
+
+// Subnavigation
+@import 'partials/subnavigation'
+
+
+// Front 
+// Main page
+@import 'partials/main'
+
+// Guide
+@import 'partials/guide'
+
+// Pages
+@import 'partials/pages'
