@@ -1,0 +1,1 @@
+# eg-front-nuxt
