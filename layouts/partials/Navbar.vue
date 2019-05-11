@@ -47,7 +47,7 @@
                         </div>
                         <div class="navigation__submenu block-shadow mt-2" v-if="submenu" v-click-outside="submenuClose">
                             <div class="navigation__submenu-item">
-                                <a href="" class="navigation__submenu-link">Настройки профиля</a>
+                                <nuxt-link to="/profile" class="navigation__submenu-link">Настройки профиля</nuxt-link>
                             </div>
                             <div class="navigation__submenu-item">
                                 <a href="" class="navigation__submenu-link">Добавить экскурсию</a>
@@ -87,7 +87,6 @@ export default {
         },
 
         submenuClose(event) {
-            console.log(event.target);
             if(event.target.className !== 'navigation__burger-span')
                 this.submenu = false
         }

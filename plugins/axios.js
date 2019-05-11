@@ -1,4 +1,5 @@
 export default function({ $axios, store, app, redirect }) {
+
     $axios.onError(error => {
         
         if (error.response && error.response.status === 422) {

@@ -33,7 +33,6 @@ export default {
   */
   css: [
     '~/assets/sass/style.sass',
-    //{ src: '~assets/sass/style.sass', lang: 'sass' },
   ],
 
   /*
@@ -43,6 +42,7 @@ export default {
     '@/plugins/mixins/validation',
     '@/plugins/mixins/user',
     '@/plugins/axios',
+    '@/plugins/interceptors',
   ],
 
   /*
@@ -54,6 +54,20 @@ export default {
     '@nuxtjs/auth',
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
+    ['nuxt-fontawesome', {
+      component: 'fa',
+      imports: [
+        //import whole set
+        {
+          set: '@fortawesome/free-solid-svg-icons',
+          icons: ['fas']
+        },
+        {
+          set: '@fortawesome/free-brands-svg-icons',
+          icons: ['fab']
+        },
+      ]
+    }]
   ],
 
   /**

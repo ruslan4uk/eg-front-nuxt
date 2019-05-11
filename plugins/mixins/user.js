@@ -9,7 +9,7 @@ const User = {
                 ...mapGetters({
                     user: 'auth/user',
                     authenticated: 'auth/authenticated'
-                })
+                }),
             }
         })
     }
