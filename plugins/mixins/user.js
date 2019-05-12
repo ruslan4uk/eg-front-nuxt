@@ -8,7 +8,8 @@ const User = {
             computed: {
                 ...mapGetters({
                     user: 'auth/user',
-                    authenticated: 'auth/authenticated'
+                    authenticated: 'auth/authenticated',
+                    baseImgPath: 'auth/baseImgPath'
                 }),
             }
         })

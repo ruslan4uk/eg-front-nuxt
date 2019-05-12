@@ -3,15 +3,7 @@
         <b-container>
             <b-row>
                 <b-col lg="3" class="mb-4 mb-lg-0">
-                     <div class="profile__user d-flex align-items-center">
-                        <div class="profile__avatar mr-3">
-                            <img src="~assets/images/general/avatar-blank.jpg" alt="">                 
-                        </div>
-                        <div class="profile__username">{{ user.name }}</div>
-                    </div>
-                    <!-- <a href="" class="profile__avatar-upload">Добавить фото</a> -->
-                    <label for="profile-avatar" class="profile__avatar-upload">Добавить фото</label>
-                    <input type="file" name="avatar" ref="avatar" id="profile-avatar" class="profile__avatar-uploader">
+                    <ProfileAvatar url="/profile/upload-avatar" @change="setAvatar"/>
                 </b-col>
 
                 <b-col lg="9">
@@ -53,36 +45,86 @@
                                     <div v-if="form.user_city_ids.length == 0 || addCity">
                                         <City @change="changeLocation"></City>
                                     </div>
+                                    <div class="invalid-feedback d-block" v-if="errors.user_city_ids">
+                                        {{ errors.user_city_ids[0] }}
+                                    </div>
                                 </div>
                                 <div class="col-auto">
                                     <div class="custom-input mb-0 pb-0">
-                                        <div class="btn btn-sm btn-small btn-blue js--location-add" @click="addCity = !addCity">Добавить</div>
+                                        <div class="btn btn-sm btn-small btn-blue" @click="addCity = !addCity">Добавить</div>
                                     </div>
                                 </div>
                             </b-row>
 
                             <div class="card-subtitle mt-4">Контакты</div>
-
-                            <!-- TODO: Contacts -->
+                            <b-row>
+                                <div class="col-12 col-md">
+                                    <!-- TODO: Contacts -->
+                                    <div class="invalid-feedback d-block" v-if="errors.name">
+                                        {{ errors.name[0] }}
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="custom-input mb-0 pb-0">
+                                        <div class="btn btn-sm btn-small btn-blue">Добавить</div>
+                                    </div>
+                                </div>
+                            </b-row>
+                            
                            
                         </b-card>
 
                         <!-- Services -->
                         <b-card class="block-shadow border25 mb-4">
-
+                            <div class="card-title mb-3">Услуги</div>
+                            <b-form-group class="mb-2">
+                                <div class="custom-checkbox custom-checkbox--profile mr-4 mb-2" 
+                                    v-for="(service,index) in services" :key="index">
+                                    <input type="checkbox" 
+                                            :value="service.id" 
+                                            v-model="form.user_service"
+                                            :id="'service_' + index">
+                                    <label class="form-check-label" :for="'service_' + index">{{ service.name }}</label>
+                                    <div class="invalid-feedback d-block" v-if="errors.user_service">
+                                        {{ errors.user_service[0] }}
+                                    </div>
+                                </div>
+                            </b-form-group>
                         </b-card>
-                        <div class="card block-shadow border25 mb-4">
-                            <div class="card-body">
-                                <div class="card-title mb-3">Услуги</div>
-                                
+
+                        <!-- About -->
+                        <b-card class="block-shadow border25 mb-4">
+                            <div class="card-title mb-0">Расскажите туристам о себе</div>
+                            <div class="card-title-small mb-3">
+                                не использовать тексты с других сайтов. Проверить уникальность текста 
+                                <a href="text.ru" target="_blank">text.ru</a>
                             </div>
-                        </div>
+                            <b-form-group class="custom-input mb-0">
+                                <textarea wrap="soft" cols="30" rows="12" 
+                                        :class="'form-control' 
+                                                + [errors['user_data.about'] ? ' is-invalid' : '']" 
+                                        v-model="form.about"></textarea>
+                                <div class="invalid-feedback d-block" v-if="errors.about">
+                                    {{ errors.about[0] }}
+                                </div>
+                            </b-form-group>
+                        </b-card>
 
-                        {{ services }}
+                        <!-- License Uploader -->
+                        <b-card class="block-shadow border25 mb-4">
+                            <div class="card-title mb-0">Лицензия гида</div>
+                            <div class="card-title-small mb-3">Если у Вас есть лицензия, обязательно покажите ее, это повысит уровень доверия к Вам</div>
+                            
+                            <MultiUploader
+                                :items="form.user_license" 
+                                url="/profile/multi-upload" 
+                                urldelete="/profile/multi-upload/delete"
+                                @change="changeLicense"/>
 
-                        <hr>
-
-                        {{ languagies }}
+                            <div class="invalid-feedback d-block" v-if="errors.user_license">
+                                {{ errors.user_license[0] }}
+                            </div>
+                        </b-card>
 
                         <b-form-group class="custom-input d-flex justify-content-center">
                             <b-button type="submit" class="btn btn-sm btn-blue">Сохранить</b-button>
@@ -99,12 +141,20 @@ import { mapGetters, mapMutations } from 'vuex'
 import Tags from '~/components/Tags'
 import City from '~/components/City'
 import CityDisabled from '~/components/CityDisabled'
+import MultiUploader from '~/components/Uploader/MultiUploader'
+import ProfileAvatar from '~/components/Uploader/ProfileAvatar'
 
     
 export default {
     middleware: ['auth'],
 
-    components: { Tags, City, CityDisabled },
+    components: { 
+        Tags, 
+        City, 
+        CityDisabled, 
+        MultiUploader,
+        ProfileAvatar
+    },
 
     data() {
         return {
@@ -114,7 +164,7 @@ export default {
    
     asyncData ({store}) {
         return {
-            form: Object.assign({}, store.state.auth.user)
+            form: Object.assign({}, store.state.auth.user),
         }
     },
 
@@ -133,6 +183,8 @@ export default {
     methods: {
         saveProfile() {
             this.$axios.post('/profile', this.form).then(res => {
+                this.setUser(Object.assign({}, this.form))
+
                 this.$bvToast.toast(res.data.message, {
                     title: 'Внимание!',
                     autoHideDelay: 5000,
@@ -151,11 +203,32 @@ export default {
             })
         },
 
+        changeLanguage(id) {
+            this.form.user_language = this.form.user_language.concat(id);     
+        },
+        deleteLanguage(id) {
+            this.form.user_language = this.form.user_language.filter(x => x !== id);   
+        },
+        changeLocation(id){
+            this.form.user_city_ids = this.form.user_city_ids.concat(id);   
+        },
+        deleteLocation(id) {
+            this.form.user_city_ids = this.form.user_city_ids.filter(x => x !== id);
+        },
+
+        changeLicense(obj) {
+            this.form.user_license = obj
+            this.setLicense(this.form.user_license)
+        },
+
+        changeAvatar(url) {
+            this.form.avatar = url
+        },
+
         ...mapMutations({
-            changeLanguage: 'auth/SET_LANGUAGES',
-            deleteLanguage: 'auth/DELETE_LANGUAGES',
-            changeLocation: 'auth/SET_LOCATION',
-            deleteLocation: 'auth/DELETE_LOCATION',
+            setUser: 'auth/SET_USER',
+            setLicense: 'auth/SET_LICENSE',
+            setAvatar: 'auth/SET_AVATAR'
         }),
         
     },

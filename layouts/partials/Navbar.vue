@@ -42,7 +42,8 @@
                         <div class="navigation__name d-flex justify-content-end align-items-center" @click="submenu = !submenu">
                             <span>{{ user.name }}</span>
                             <div class="navigation__avatar ml-3">
-                                <img src="~assets/images/general/avatar-blank.jpg" alt="" />
+                                <img src="~assets/images/general/avatar-blank.jpg" alt="" v-if="!user.avatar" />
+                                <img :src="baseImgPath + user.avatar" alt="" v-if="user.avatar" />
                             </div>
                         </div>
                         <div class="navigation__submenu block-shadow mt-2" v-if="submenu" v-click-outside="submenuClose">
