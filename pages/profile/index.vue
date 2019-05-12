@@ -60,8 +60,23 @@
                                     </div>
                                 </div>
                             </b-row>
+
+                            <div class="card-subtitle mt-4">Контакты</div>
+
+                            <!-- TODO: Contacts -->
                            
                         </b-card>
+
+                        <!-- Services -->
+                        <b-card class="block-shadow border25 mb-4">
+
+                        </b-card>
+                        <div class="card block-shadow border25 mb-4">
+                            <div class="card-body">
+                                <div class="card-title mb-3">Услуги</div>
+                                
+                            </div>
+                        </div>
 
                         {{ services }}
 
@@ -144,7 +159,6 @@ export default {
         }),
         
     },
-
 }
 </script>
 

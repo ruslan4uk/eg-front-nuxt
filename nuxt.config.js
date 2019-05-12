@@ -77,6 +77,7 @@ export default {
     plugins: [
       '~/plugins/axios'
     ],
+    watchLoggedIn: true,
     strategies: {
       local: {
         endpoints: {
@@ -84,7 +85,7 @@ export default {
           user: { url: '/profile', method: 'get', propertyName: 'data' },
           logout: { url: '/auth/logout', method: 'post' },
         },
-        //tokenRequired: true,
+        tokenRequired: true,
         tokenType: 'Bearer',
       }
     },
