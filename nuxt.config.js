@@ -94,6 +94,7 @@ export default {
       logout: '/auth/login',
       home: '/'
     },
+    watchLoggedIn: true,
   },
 
   /*

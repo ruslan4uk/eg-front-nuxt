@@ -4,21 +4,34 @@ export default function({ $axios, store, app, redirect }) {
     $axios.interceptors.response.use(response => {
         const newtoken = get(response, 'headers.authorization')        
         if (newtoken) {
-            // console.log('NewToken: ', newtoken);
             store.$auth.setToken('local', newtoken);
         }
         return response;
     }, error => {
-        switch (error.response.status) {
+        //console.log(error.response.data);
+
+        if(error.response.status === 401) {
+            store.$auth.reset()
+            store.$auth.logout();
+            console.log(store.$auth.getToken('local'));
+        }
+
+        if(error.response.data.message === "The token has been blacklisted") {
+                store.$auth.reset()
+                store.$auth.logout();
+                console.log(store.$auth.getToken('local'));
+        }
+
+        switch (error.response.status) {            
             case 401:
-                store.$auth.logout()
-                // console.log('Error 401');
+            store.$auth.reset()
+            store.$auth.logout();
+            console.log(store.$auth.getToken('local'));
                 break
             case 422:
                 store.dispatch('validation/setErrors', error.response.data.errors);
                 break;
             default:
-                //console.log(error.response)
             }
         return Promise.reject(error)
     });

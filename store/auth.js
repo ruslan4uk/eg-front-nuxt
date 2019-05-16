@@ -20,6 +20,9 @@ export default {
         },
         baseImgPath(state) {
             return state.baseImgPath
+        },
+        loggedIn(state) {
+            return state.loggedIn
         }
     },
 
@@ -33,22 +36,7 @@ export default {
         },
         SET_AVATAR(state, payload) {            
             state.user.avatar = payload
-            
-            console.log(state.user.avatar);
         }
-        // SET_LANGUAGES(state, payload) {
-        //     state.user.user_language.push(payload)
-        // },
-        // DELETE_LANGUAGES(state, payload) {
-        //     state.user.user_language.splice(state.user.user_language.indexOf(payload), 1)
-        // },
-
-        // SET_LOCATION(state, payload) {
-        //     state.user.user_city_ids.push(payload)
-        // },
-        // DELETE_LOCATION(state, payload) {
-        //     this._vm.$delete(state.user.user_city_ids, state.user.user_city_ids.indexOf(payload))
-        // }
     },
 
     actions: {

@@ -72,8 +72,17 @@
         methods: {
             async login() {                
                 await this.$auth.login({ data: this.form });
-                this.$router.push({name: 'index'});
+
+                if(this.user.active === 0) {
+                    this.$router.push({path: '/profile'});
+                } else {
+                    this.$router.push({name: 'index'});
+                }
             }   
+        },
+
+        created() {
+            // console.log(this.$auth);
         },
     }
 </script>

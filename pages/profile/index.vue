@@ -56,17 +56,24 @@
                                 </div>
                             </b-row>
 
-                            <div class="card-subtitle mt-4">Контакты</div>
+                            <div class="card-subtitle mt-4 mb-4">Контакты</div>
                             <b-row>
                                 <div class="col-12 col-md">
                                     <!-- TODO: Contacts -->
-                                    <div class="invalid-feedback d-block" v-if="errors.name">
-                                        {{ errors.name[0] }}
+                                    <Contacts 
+                                        v-for="(contact, index) in form.user_contact" :key="index"
+                                        :item="contact"
+                                        :errors="errors"
+                                        :indexes="index"
+                                        @change="changeContact"
+                                        @delete="deleteContact"></Contacts>
+                                    <div class="invalid-feedback d-block" v-if="errors.user_contact">
+                                        {{ errors.user_contact[0] }}
                                     </div>
                                 </div>
                                 <div class="col-auto">
                                     <div class="custom-input mb-0 pb-0">
-                                        <div class="btn btn-sm btn-small btn-blue">Добавить</div>
+                                        <div class="btn btn-sm btn-small btn-blue" @click="addContact">Добавить</div>
                                     </div>
                                 </div>
                             </b-row>
@@ -85,9 +92,9 @@
                                             v-model="form.user_service"
                                             :id="'service_' + index">
                                     <label class="form-check-label" :for="'service_' + index">{{ service.name }}</label>
-                                    <div class="invalid-feedback d-block" v-if="errors.user_service">
-                                        {{ errors.user_service[0] }}
-                                    </div>
+                                </div>
+                                <div class="invalid-feedback d-block" v-if="errors.user_service">
+                                    {{ errors.user_service[0] }}
                                 </div>
                             </b-form-group>
                         </b-card>
@@ -141,9 +148,9 @@ import { mapGetters, mapMutations } from 'vuex'
 import Tags from '~/components/Tags'
 import City from '~/components/City'
 import CityDisabled from '~/components/CityDisabled'
+import Contacts from '~/components/Contacts'
 import MultiUploader from '~/components/Uploader/MultiUploader'
 import ProfileAvatar from '~/components/Uploader/ProfileAvatar'
-
     
 export default {
     middleware: ['auth'],
@@ -153,7 +160,8 @@ export default {
         City, 
         CityDisabled, 
         MultiUploader,
-        ProfileAvatar
+        ProfileAvatar,
+        Contacts,
     },
 
     data() {
@@ -169,8 +177,10 @@ export default {
     },
 
     async fetch({ store }) {
+        await store.$auth.fetchUser()
         await store.dispatch('helpers/languagies/getLanguagies')
         await store.dispatch('helpers/services/getServices')
+        await store.dispatch('helpers/contactType/getContactType')
     },
 
     computed: {
@@ -183,6 +193,8 @@ export default {
     methods: {
         saveProfile() {
             this.$axios.post('/profile', this.form).then(res => {
+                this.form.user_contact = this.form.user_contact.filter(x => x.type !== null && x.text !== null)
+
                 this.setUser(Object.assign({}, this.form))
 
                 this.$bvToast.toast(res.data.message, {
@@ -223,6 +235,28 @@ export default {
 
         changeAvatar(url) {
             this.form.avatar = url
+        },
+
+        addContact() {
+            if (this.form.user_contact.length < 5)
+                this.form.user_contact = this.form.user_contact.concat({type: null, text: null})
+            else 
+                this.$bvToast.toast('Не более 5 контактов', {
+                    title: 'Ошибка!',
+                    autoHideDelay: 5000,
+                    variant: 'danger',
+                    solid: true,
+                    toaster: 'b-toaster-bottom-right',
+                })
+        },
+
+        changeContact(obj, index) {
+            this.form.user_contact[index] = obj
+        },
+
+        deleteContact(index) {
+            if(this.form.user_contact.length > 1)
+                this.form.user_contact = this.form.user_contact.filter((x,i) => i !== index)
         },
 
         ...mapMutations({

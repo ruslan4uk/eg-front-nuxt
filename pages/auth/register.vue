@@ -89,8 +89,14 @@
         methods: {
             register() {
                 this.$axios.post('/auth/register', this.form).then(res => {
-                    console.log('Reegister success');
-                    
+                    this.$bvToast.toast('Регистрация успешна', {
+                        title: 'Внимание!',
+                        autoHideDelay: 5000,
+                        variant: 'success',
+                        solid: true,
+                        toaster: 'b-toaster-bottom-right',
+                    })                    
+                    this.$router.push({path: '/auth/login'})
                 })
             }
         },

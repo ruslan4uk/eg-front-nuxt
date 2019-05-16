@@ -1,35 +1,42 @@
 <template>
-  <section class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        nuxt
-      </h1>
-      <h2 class="subtitle">
-        My grand Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >GitHub</a>
+<section>
+  <div class="main d-flex align-items-center">
+      <div class="container">
+          <div class="row justify-content-end">
+              <div class="col-12 col-lg-6">
+                  <div class="main__title mb-3">Все совершенно просто!</div>
+                  <div class="main__subtitle">Выберите страну и начните путешествие прямо сейчас</div>
+                  <div class="main__search">
+                      
+                  </div>
+              </div>
+          </div>
       </div>
-    </div>
-  </section>
+  </div>
+
+  <div class="main-popular mt-5 mb-3">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <h4 class="mb-5">Популярные направления</h4>
+              </div>
+              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Рим</a>
+              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Москва</a>
+              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Санкт - Питербург</a>
+              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Нижний Новгород</a>
+              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Нью - Йорк</a>
+              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Лос Анжелес</a>
+          </div>
+      </div>
+  </div>
+</section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 
 export default {
-  components: {
-    Logo
-  }
+    layout (context) {
+      return 'revers'
+    }
 }
 </script>

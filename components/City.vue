@@ -1,6 +1,6 @@
 <template>
     <div class="locations">
-        <b-form-group class="custom-input mt-4">
+        <b-form-group class="custom-input mb-0">
             <input type="text" class="form-control" v-model="location" placeholder="Введите город" :id="'location' + index">
             <label :for="'location' + index">Введите город</label>
             <div class="location__suggest">

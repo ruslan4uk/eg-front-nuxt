@@ -1,10 +1,10 @@
 <template>
-    <section class="navigation mb-5">
+    <section :class="'navigation mb-5' + [revers ? ' navigation--revers navigation--main' : '']">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-4 col-md-6">
                     <nuxt-link to="/" class="logo mr-md-5">EG</nuxt-link>
-                    <a href="" class="navigation__link d-none d-md-inline">О нас</a>
+                    <nuxt-link to="/about" class="navigation__link d-none d-md-inline">О нас</nuxt-link>
                     <a href="" class="navigation__link d-none d-md-inline">Обратная связь</a>
                 </div>
                 <div class="d-flex col-8 col-md-6 ml-auto justify-content-end">
@@ -13,14 +13,15 @@
                         <nuxt-link to="/auth/login" class="btn btn-sm btn-blue">Вход</nuxt-link>
                         <nuxt-link to="/auth/register" class="btn btn-sm btn-white ml-3">Регистрация</nuxt-link>
                     </div>
+
                     <!-- Guest block -->
-                    <div class="d-md-none position-relative" v-if="!authenticated">
+                    <div class="d-md-none position-relative" v-if="!authenticated" v-click-outside="submenuClose">
                         <div class="navigation__burger" @click="submenu = !submenu">
                             <span class="navigation__burger-span"></span>
                             <span class="navigation__burger-span"></span>
                             <span class="navigation__burger-span"></span>
                         </div>    
-                        <div class="navigation__submenu block-shadow mt-2" v-if="submenu" v-click-outside="submenuClose">
+                        <div class="navigation__submenu block-shadow mt-2" v-if="submenu">
                             <div class="navigation__submenu-item">
                                 <nuxt-link to="/auth/login" class="navigation__submenu-link">Вход</nuxt-link>
                             </div>
@@ -38,7 +39,7 @@
                     </div>
                     <!-- End guest block -->
                     <!-- Auth user block  -->
-                    <div class="navigation__user" v-if="authenticated">
+                    <div class="navigation__user" v-if="authenticated" v-click-outside="submenuClose">
                         <div class="navigation__name d-flex justify-content-end align-items-center" @click="submenu = !submenu">
                             <span>{{ user.name }}</span>
                             <div class="navigation__avatar ml-3">
@@ -46,18 +47,18 @@
                                 <img :src="baseImgPath + user.avatar" alt="" v-if="user.avatar" />
                             </div>
                         </div>
-                        <div class="navigation__submenu block-shadow mt-2" v-if="submenu" v-click-outside="submenuClose">
+                        <div class="navigation__submenu block-shadow mt-2" v-if="submenu">
                             <div class="navigation__submenu-item">
                                 <nuxt-link to="/profile" class="navigation__submenu-link">Настройки профиля</nuxt-link>
                             </div>
                             <div class="navigation__submenu-item">
-                                <a href="" class="navigation__submenu-link">Добавить экскурсию</a>
+                                <a href="" @click.prevent="createTour" class="navigation__submenu-link">Добавить экскурсию</a>
                             </div>
                             <div class="navigation__submenu-item">
-                                <a href="" class="navigation__submenu-link">Мои экскурсии</a>
+                                <nuxt-link to="/profile/tour" class="navigation__submenu-link">Мои экскурсии</nuxt-link>
                             </div>
                             <div class="navigation__submenu-item">
-                                <a @click="logout" class="navigation__submenu-link js--navigation-logout">Выход</a>
+                                <a @click.prevent="logout" href="" class="navigation__submenu-link">Выход</a>
                             </div>
 
                             <form id="js--logout-form" action="" method="POST" style="display: none;">
@@ -73,13 +74,22 @@
 </template>
 
 <script>
-import vClickOutside from 'v-click-outside'
+import ClickOutside from 'vue-click-outside'
+import { mapGetters } from 'vuex'
 
 export default {
+    props: ['revers'],
+
     data() {
         return {
             submenu: false
         }
+    },
+
+    computed: {
+        ...mapGetters({
+            loggedIn: 'auth/loggedIn'
+        })
     },
 
     methods: {
@@ -90,7 +100,14 @@ export default {
         submenuClose(event) {
             if(event.target.className !== 'navigation__burger-span')
                 this.submenu = false
-        }
+        },
+        
+        async createTour() {
+            await this.$axios.get('profile/tour/create').then(res => {
+                this.$router.push({path: '/profile/tour/' + res.data.data.id})
+            })
+        },
+        
     },
 
     watch: {
@@ -100,8 +117,8 @@ export default {
     },
 
     directives: {
-        clickOutside: vClickOutside.directive
-    },
+        ClickOutside
+    }
 }
 </script>
 
