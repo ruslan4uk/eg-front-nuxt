@@ -6,7 +6,7 @@
                     <!-- Avatar -->
                 </b-col>
                 <b-col lg="9">
-                    <b-form>
+                    <b-form @submit.prevent="saveTour">
                         <b-card class="block-shadow border25 mb-4">
                             <div class="card-title mb-4">Основная информация</div>
                             <b-form-group class="custom-input mb-4">
@@ -26,6 +26,9 @@
                                 <City 
                                     v-if="!form.city_id"
                                     @change="changeLocation"></City>
+                                <div class="invalid-feedback d-block" v-if="errors.city_id">
+                                    {{ errors.city_id[0] }}
+                                </div>
                             </div>
                             
 
@@ -41,8 +44,8 @@
                             <b-form-group class="custon-input mb-4">
                                 <Tags label="Выберите язык" 
                                     :selected="form.tour_language"
-                                    :options="languagies"
-                                    :err="errors.user_language"
+                                    :options="helpers.language"
+                                    :err="errors.tour_language"
                                     placeholder="Выберите"
                                     @change="changeLanguage"
                                     @delete="deleteLanguage"></Tags>
@@ -59,22 +62,28 @@
                                 <b-col md="6" class="mt-3">
                                     <b-form-group class="custom-input mb-4">
                                         <VueSelect
-                                            :option="categories"
+                                            :option="helpers.category"
                                             :current="form.category_id"
                                             @change="changeCategoryId"
                                             placeholder = "Категория экскурсии"
                                         ></VueSelect>
+                                        <div class="invalid-feedback d-block" v-if="errors.category_id">
+                                            {{ errors.category_id[0] }}
+                                        </div>
                                     </b-form-group>
                                 </b-col>
 
                                 <b-col md="6" class="mt-3">
                                     <b-form-group class="custom-input mb-4">
                                         <VueSelect
-                                            :option="people_category"
+                                            :option="helpers.people_category"
                                             :current="form.people_category_id"
                                             @change="changePeopleCategoryId"
                                             placeholder = "Категория доступности"
                                         ></VueSelect>
+                                        <div class="invalid-feedback d-block" v-if="errors.people_category_id">
+                                            {{ errors.people_category_id[0] }}
+                                        </div>
                                     </b-form-group>
                                 </b-col>
 
@@ -82,16 +91,13 @@
                                     <b-form-group class="custom-input mb-4">
                                         <b-input v-model.number="form.people_count" type="number" placeholder="Количество участников" id="people_count"></b-input>
                                         <label for="people_count">Количество участников</label>
-                                        <div class="invalid-feedback d-block" v-if="errors.people_count">
-                                            {{ errors.people_count[0] }}
-                                        </div>
                                     </b-form-group>
                                 </b-col>
 
                                 <b-col md="3">
                                     <b-form-group class="custom-input mb-4">
                                         <VueSelect
-                                            :option="timing"
+                                            :option="helpers.timing"
                                             :current="form.timing_id"
                                             @change="changeTimingId"
                                             placeholder = "Длительность экскурсии"
@@ -105,16 +111,13 @@
                                             <b-form-group class="custom-input mb-4">
                                                 <b-input v-model.number="form.price" type="number" placeholder="Стоимость" id="price"></b-input>
                                                 <label for="price">Стоимость</label>
-                                                <div class="invalid-feedback d-block" v-if="errors.price">
-                                                    {{ errors.price[0] }}
-                                                </div>
                                             </b-form-group>
                                         </b-col>
 
                                         <b-col>
                                             <b-form-group class="custom-input mb-4">
                                                 <VueSelect
-                                                    :option="currencies"
+                                                    :option="helpers.currency"
                                                     :current="form.currency_id"
                                                     @change="changeCurrencyId"
                                                     placeholder = "Валюта"
@@ -125,7 +128,7 @@
                                         <b-col>
                                             <b-form-group class="custom-input mb-4">
                                                 <VueSelect
-                                                    :option="price_type"
+                                                    :option="helpers.price_type"
                                                     :current="form.price_type_id"
                                                     @change="changePriceTypeId"
                                                     placeholder = "Выберите"
@@ -133,6 +136,24 @@
                                             </b-form-group>
                                         </b-col>
                                     </b-row>
+                                </b-col>
+                                <!-- errors -->
+                                <b-col cols="12">
+                                    <div class="invalid-feedback d-block" v-if="errors.people_count">
+                                        {{ errors.people_count[0] }}
+                                    </div>
+                                    <div class="invalid-feedback d-block" v-if="errors.timing_id">
+                                        {{ errors.timing_id[0] }}
+                                    </div>
+                                    <div class="invalid-feedback d-block" v-if="errors.price">
+                                        {{ errors.price[0] }}
+                                    </div>
+                                    <div class="invalid-feedback d-block" v-if="errors.currency_id">
+                                        {{ errors.currency_id[0] }}
+                                    </div>
+                                    <div class="invalid-feedback d-block" v-if="errors.price_type_id">
+                                        {{ errors.price_type_id[0] }}
+                                    </div>
                                 </b-col>
                             </b-row>
                         </b-card>
@@ -173,6 +194,44 @@
                             </b-row>
                         </b-card>
 
+                        <!-- About -->
+                        <b-card class="block-shadow border25 mb-4">
+                            <div class="card-title mb-0">Расскажите туристам об экскурсии</div>
+                            <div class="card-title-small mb-3">
+                                не использовать тексты с других сайтов. Проверить уникальность текста 
+                                <a href="text.ru" target="_blank">text.ru</a>
+                            </div>
+                            <b-form-group class="custom-input mb-0">
+                                <textarea wrap="soft" cols="30" rows="12" 
+                                        :class="'form-control' 
+                                                + [errors['user_data.about'] ? ' is-invalid' : '']" 
+                                        v-model="form.about"></textarea>
+                                <div class="invalid-feedback d-block" v-if="errors.about">
+                                    {{ errors.about[0] }}
+                                </div>
+                            </b-form-group>
+                        </b-card>
+
+                         <!-- Images Uploader -->
+                        <b-card class="block-shadow border25 mb-4">
+                            <div class="card-title mb-0">Фотографии экскурсии</div>
+                            <div class="card-title-small mb-3"></div>
+
+                            <MultiUploader
+                                :items="form.tour_image" 
+                                url="/profile/multi-upload" 
+                                urldelete="/profile/multi-upload/delete"
+                                @change="changeImage"/>
+
+                            <div class="invalid-feedback d-block" v-if="errors.tour_image">
+                                {{ errors.tour_image[0] }}
+                            </div>
+                        </b-card>
+
+                        <b-form-group class="custom-input d-flex justify-content-center">
+                            <b-button type="submit" class="btn btn-sm btn-blue">Сохранить</b-button>
+                        </b-form-group>
+
                     </b-form> 
                 </b-col>
             </b-row>
@@ -186,6 +245,7 @@ import Tags from '~/components/Tags'
 import City from '~/components/City'
 import CityDisabled from '~/components/CityDisabled'
 import VueSelect from '~/components/VueSelect'
+import MultiUploader from '~/components/Uploader/MultiUploader'
 
 export default {
     middleware: ['auth'],
@@ -195,15 +255,17 @@ export default {
         City,
         CityDisabled,
         VueSelect,
+        MultiUploader,
+    },
+
+    head() {
+        return {
+            title: this.form.name ? this.form.name : 'Создание тура'
+        }
     },
 
     async asyncData ({ store, params, error }) {
-        await store.dispatch('helpers/languagies/getLanguagies')
-        await store.dispatch('helpers/categories/getCategories')
-        await store.dispatch('helpers/peopleCategory/getPeopleCategory')
-        await store.dispatch('helpers/timing/getTiming')
-        await store.dispatch('helpers/priceType/getPriceType')
-        await store.dispatch('helpers/currencies/getCurrencies')
+        await store.dispatch('helpers/all/getHelpers')
 
         return store.$axios.get(`profile/tour/${params.id}`)
             .then((res) => {
@@ -216,16 +278,32 @@ export default {
 
     computed: {
         ...mapGetters({
-            languagies: 'helpers/languagies/languagies',
-            categories: 'helpers/categories/categories',
-            people_category: 'helpers/peopleCategory/people_category',
-            timing: 'helpers/timing/timing',
-            price_type: 'helpers/priceType/price_type',
-            currencies: 'helpers/currencies/currencies'
+            helpers: 'helpers/all/helpers'
         }),
     },
     
     methods: {
+        saveTour() {
+            console.log(this.form);
+            
+            this.$axios.post('/profile/tour', this.form).then(res => {
+                this.$bvToast.toast(res.data.message, {
+                    title: 'Внимание!',
+                    autoHideDelay: 5000,
+                    variant: 'success',
+                    solid: true,
+                    toaster: 'b-toaster-bottom-right',
+                })
+            }).catch(error => {
+                this.$bvToast.toast('Неправильно заполнены поля формы', {
+                    title: 'Ошибка!',
+                    autoHideDelay: 5000,
+                    variant: 'danger',
+                    solid: true,
+                    toaster: 'b-toaster-bottom-right',
+                })
+            })
+        },
         deleteLocation(id) {
             this.form.city_id = null 
         },
@@ -260,6 +338,10 @@ export default {
 
         changeCurrencyId(id) {
             this.form.currency_id = id
+        },
+
+        changeImage(obj) {
+            this.form.tour_image = obj
         }
     },
 }

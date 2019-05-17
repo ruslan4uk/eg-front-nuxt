@@ -22,7 +22,7 @@
                             <b-form-group class="custon-input mb-4">
                                 <Tags label="Выберите язык" 
                                     :selected="form.user_language"
-                                    :options="languagies"
+                                    :options="helpers.language"
                                     :err="errors.user_language"
                                     placeholder="Выберите"
                                     @change="changeLanguage"
@@ -61,6 +61,13 @@
                                 <div class="col-12 col-md">
                                     <!-- TODO: Contacts -->
                                     <Contacts 
+                                        v-if="form.user_contact.length < 1"
+                                        :item="{type: null, text: null}"
+                                        :errors="errors"
+                                        :indexes="0"
+                                        @change="changeContact"
+                                        @delete="deleteContact"></Contacts>
+                                    <Contacts 
                                         v-for="(contact, index) in form.user_contact" :key="index"
                                         :item="contact"
                                         :errors="errors"
@@ -86,7 +93,7 @@
                             <div class="card-title mb-3">Услуги</div>
                             <b-form-group class="mb-2">
                                 <div class="custom-checkbox custom-checkbox--profile mr-4 mb-2" 
-                                    v-for="(service,index) in services" :key="index">
+                                    v-for="(service,index) in helpers.service" :key="index">
                                     <input type="checkbox" 
                                             :value="service.id" 
                                             v-model="form.user_service"
@@ -164,6 +171,12 @@ export default {
         Contacts,
     },
 
+    head() {
+        return {
+            title: this.form.name + ' - настройка профиля'
+        }
+    },
+
     data() {
         return {
             addCity: false
@@ -178,15 +191,14 @@ export default {
 
     async fetch({ store }) {
         await store.$auth.fetchUser()
-        await store.dispatch('helpers/languagies/getLanguagies')
-        await store.dispatch('helpers/services/getServices')
-        await store.dispatch('helpers/contactType/getContactType')
+        await store.dispatch('helpers/all/getHelpers')
     },
 
     computed: {
         ...mapGetters({
-            services: 'helpers/services/services',
-            languagies: 'helpers/languagies/languagies'
+            helpers: 'helpers/all/helpers'
+            // services: 'helpers/services/services',
+            // languagies: 'helpers/languagies/languagies'
         })
     },
 

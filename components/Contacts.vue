@@ -2,7 +2,7 @@
     <b-row>
         <div class="col-auto com-vue-select">
             <VueSelect
-                :option="currencies"
+                :option="helpers.contact_type"
                 :current="comItem.type"
                 @change="changeType"
                 placeholder = "Выберите"
@@ -45,7 +45,7 @@ export default {
 
     computed: {
         ...mapGetters({
-            currencies: 'helpers/contactType/contactType',
+            helpers: 'helpers/all/helpers',
         })
     },
 

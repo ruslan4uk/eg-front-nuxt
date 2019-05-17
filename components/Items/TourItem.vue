@@ -1,35 +1,38 @@
 <template>
-    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+    <b-col cols="12" sm="6" lg="3" class="mb-4">
         <div class="tour-item border25 block-shadow block-shadow-hover">
-            <a href="">
-                <!-- @if ($tour->avatar) -->
-                    <img src="" alt="" class="border25 mb-3">
-                <!-- @else  -->
-                    <img src="/images/general/blank.png" alt="" class="border25 mb-3">
-                <!-- @endif -->
-            </a>
-            <!-- <a href="" class="tour-item__title mb-3">{{ $tour->name }}</a> -->
+            
+            <nuxt-link :to="'/profile/tour/' + item.id">
+                <img :src="item.avatar" :alt="item.name" class="border25 mb-3" v-if="item.avatar">
+                <img src="~assets/images/general/blank.png" alt="" class="border25 mb-3" v-if="!item.avatar">
+            </nuxt-link>
+
+            <nuxt-link :to="'/profile/tour/' + item.id" class="tour-item__title mb-3">{{ item.name }}</nuxt-link>
             
             <div class="tour-item__footer d-flex align-items-end justify-content-between">
                 <div class="tour-item__time" data-toggle="tooltip" data-placement="top" title="Длительность экскурсии">
                     <i class="fas fa-history"></i>
-                    <span>4-5 часов</span>
+                    <fa :icon="['fas', 'history']" />
+                    <span>{{ item.tour_timing[0].name }}</span>
                 </div>
                 <div class="tour-item__price">
-                    от 
-                    <!-- <span>{{ $tour->price }}</span> -->
-                    <span class="rubl"><i class="fas fa-ruble-sign"></i></span> 
-                    с группы
+                    от <span>{{ item.price }}</span>
+                    <fa :icon="['fas', item.tour_currency[0].iso_code]" />
+                    {{ item.tour_price_type[0].name }}
                 </div>
             </div>
+
         </div>
-    </div>
+    </b-col>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {
+    middleware: ['auth'],
+    props: ['item'],
+  
+
+}
 </script>
 
 <style scoped>

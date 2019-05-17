@@ -5,11 +5,12 @@
                 <b-col cols="12">
                     <h3 class="mb-4">Мои экскурсии</h3>
                 </b-col>
+                
                 <!-- Плашка переключатель -->
                 <b-col cols="12" class="mb-5">
                     <div class="subnavigation border25">
                         <div class="subnavigation__list d-flex">
-                            <nuxt-link to="/profile/tour" class="subnavigation__item border25">Активные</nuxt-link>
+                            <nuxt-link to="/profile/tour" exact class="subnavigation__item border25">Активные</nuxt-link>
                             <nuxt-link to="/profile/tour/moderate" class="subnavigation__item border25">На модерации</nuxt-link>
                         </div>
                     </div>
@@ -24,7 +25,7 @@
                     </b-row>
                 </b-col>
                 
-                <b-col cols="12"  v-if="data.total > data.per_page">
+                <b-col cols="12" v-if="data.total > data.per_page">
                     <b-pagination-nav 
                         class="mt-3 custom-pagination"
                         align="center"
@@ -64,9 +65,9 @@ export default {
     async asyncData({ store, params, query, redirect, error}) {
         let page 
 
-        if( query.page) { page = '?page=' + query.page } else { page = '' }
+        if( query.page) { page = '?page=' + query.page} else { page = ''}
 
-        return store.$axios.get('profile/tour/' + page)
+        return store.$axios.get('profile/tour-moderate/' + page)
             .then((res) => {
                 if(query.page > res.data.data.last_page) 
                     error({ statusCode: 404, message: 'Page not found' })
@@ -80,7 +81,7 @@ export default {
     methods: {
         linkGen(pageNum) {
             return { 
-                path: '/profile/tour',
+                path: '/profile/tour/moderate',
                 query: pageNum !== 1 ? { page: pageNum } : null
             }
         },
