@@ -35,7 +35,7 @@
 
                 <b-col cols="12" v-if="data.data.length === 0">
                     <div class="col-12 alert alert-danger border25 d-block pt-3 pb-3 text-center" role="alert">
-                        У вас нет ни одной экскурсии! <a href="">Создайте</a> экскурсию прямо сейчас
+                        У вас нет ни одной экскурсии! <a href="" @click.prevent="createTour">Создайте</a> экскурсию прямо сейчас
                     </div>
                 </b-col>
             </b-row>
@@ -83,6 +83,12 @@ export default {
                 path: '/profile/tour',
                 query: pageNum !== 1 ? { page: pageNum } : null
             }
+        },
+
+        async createTour() {
+            await this.$axios.get('profile/tour/create').then(res => {
+                this.$router.push({path: '/profile/tour/' + res.data.data.id})
+            })
         },
     },
 

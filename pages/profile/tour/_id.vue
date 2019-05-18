@@ -3,7 +3,10 @@
         <b-container>
             <b-row>
                 <b-col cols="8" lg="3" class="mb-4 mb-lg-0">
-                    <!-- Avatar -->
+                    <TourAvatar 
+                        :url="'/profile/tour/upload-avatar/' + form.id"
+                        :img="form.avatar"
+                        @change="setAvatar"/>
                 </b-col>
                 <b-col lg="9">
                     <b-form @submit.prevent="saveTour">
@@ -219,8 +222,8 @@
 
                             <MultiUploader
                                 :items="form.tour_image" 
-                                url="/profile/multi-upload" 
-                                urldelete="/profile/multi-upload/delete"
+                                :url="'profile/tour/multi-upload/' + form.id" 
+                                :urldelete="'profile/tour/multi-upload/' + form.id + '/delete'"
                                 @change="changeImage"/>
 
                             <div class="invalid-feedback d-block" v-if="errors.tour_image">
@@ -246,6 +249,7 @@ import City from '~/components/City'
 import CityDisabled from '~/components/CityDisabled'
 import VueSelect from '~/components/VueSelect'
 import MultiUploader from '~/components/Uploader/MultiUploader'
+import TourAvatar from '~/components/Uploader/TourAvatar'
 
 export default {
     middleware: ['auth'],
@@ -256,6 +260,7 @@ export default {
         CityDisabled,
         VueSelect,
         MultiUploader,
+        TourAvatar,
     },
 
     head() {
@@ -342,6 +347,10 @@ export default {
 
         changeImage(obj) {
             this.form.tour_image = obj
+        },
+
+        setAvatar(path) {
+            this.form.avatar = path;
         }
     },
 }

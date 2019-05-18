@@ -7,7 +7,7 @@
                   <div class="main__title mb-3">Все совершенно просто!</div>
                   <div class="main__subtitle">Выберите страну и начните путешествие прямо сейчас</div>
                   <div class="main__search">
-                      
+                      <MainSearch />
                   </div>
               </div>
           </div>
@@ -33,10 +33,15 @@
 </template>
 
 <script>
+import MainSearch from '~/components/Frontend/MainSearch'
 
 export default {
     layout (context) {
       return 'revers'
+    },
+
+    components: {
+        MainSearch,
     }
 }
 </script>

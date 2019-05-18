@@ -1,5 +1,8 @@
 <template>
-    <section :class="'navigation mb-5' + [revers ? ' navigation--revers navigation--main' : '']">
+    <section :class="'navigation mb-5' 
+        + [revers ? ' navigation--revers navigation--main' : '']
+        + [blue ? ' navigation--revers navigation--revers-blue' : '']
+        ">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-4 col-md-6">
@@ -78,7 +81,7 @@ import ClickOutside from 'vue-click-outside'
 import { mapGetters } from 'vuex'
 
 export default {
-    props: ['revers'],
+    props: ['revers', 'blue'],
 
     data() {
         return {

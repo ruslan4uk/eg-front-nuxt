@@ -43,6 +43,7 @@ export default {
     '@/plugins/mixins/user',
     '@/plugins/axios',
     '@/plugins/interceptors',
+    { src: '~/plugins/lazyload', ssr: false },
   ],
 
   /*
