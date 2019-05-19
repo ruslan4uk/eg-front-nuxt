@@ -1,3 +1,4 @@
+
 <template>
 <div>
     <section class="guide-blue-line"></section>
@@ -10,104 +11,100 @@
                         <img src="~/assets/images/general/avatar-blank.jpg" alt="" class="border25" v-if="!guide.avatar">
                     </div>
                     <div class="guide__name mb-3">{{ guide.name }}</div>
-
+                                        
+                    <div class="mb-3">
+                        <div class="subtitle mb-1">Владение языками</div>
+                        <div class="guide__small pb-1" 
+                            v-for="(language, index) in guide.user_language" :key="index">
+                            <span :class="'mr-1 flag-icon flag-icon-' + language.iso_code + ' flag-icon-squared'"></span>
+                            <span class="pb-1">{{ language.name }}</span></div>
+                    </div> 
                     
-                    <!-- @if ($guide->userData->languages) -->
-                        <div class="mb-3">
-                            <div class="subtitle mb-1">Владение языками</div>
-                            <div class="guide__small">
-                                <!-- @foreach ($guide->userData->languages as $language)
-                                    {{ $guide->userData->language($language) }}
-                                @endforeach -->
-                            </div>
-                        </div>
-                    <!-- @endif -->
-                        
+                    
+                                           
                     <div class="mb-3">
                         <div class="subtitle mb-1">Услуги</div>
-                        <div class="guide__small">
-                            <!-- {{ $guide->services()->pluck('title')->implode(', ') }} -->
+                        <div class="guide__small"
+                            v-for="(service, index) in guide.user_service" :key="index">{{ service.name }}
                         </div>
                     </div>
 
-                    <!-- @if ($guide->userData->locations) -->
-                        <div class="mb-3">
-                            <div class="subtitle mb-1">Города проживания</div>
-                            <div class="guide__small">
-                                <!-- @foreach ($guide->userData->locations as $city) -->
-                                    <div class="mb-2">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <!-- {{ $guide->userData->get_city_name($city) }} -->
-                                    </div>
-                                <!-- @endforeach -->
+                    <div class="mb-3">
+                        <div class="subtitle mb-1">Города проживания</div>
+                        <div class="guide__small"
+                            v-for="(location, index) in guide.user_city" :key="index">
+                            <div class="mb-2">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <fa :icon="['fas', 'map-marker-alt']" />
+                                {{ location.name }}, {{ location.city_country }}
                             </div>
                         </div>
-                    <!-- @endif                 -->
+                    </div>
 
-                    <!-- @if ($guide->userData->contacts) -->
-                        <div class="mb-3">
-                            <div class="subtitle mb-1">Контакты</div>
-                            <div class="guide__small">
-                                <!-- @foreach ($guide->userData->contacts as $contact) -->
-                                    <div class="mb-1">
-                                        <!-- {!! $guide->userData->contact_type($contact->type_id) !!} -->
-                                        <!-- <span class="ml-2">{{ $contact->value }}</span> -->
-                                    </div>
-                                <!-- @endforeach -->
+                    <div class="mb-3">
+                        <div class="subtitle mb-1">Контакты</div>
+                        <div class="guide__small"
+                            v-for="(contact, index) in guide.user_contact_type" :key="index">
+                            <div class="mb-1">
+                                <span v-b-tooltip.hover :title="contact.contact_type[0].name">
+                                    {{ contact.text }}
+                                </span>                                    
                             </div>
                         </div>
-                    <!-- @endif -->
+                    </div>
 
                 </div>
 
-                <!-- {{-- Right coll --}} -->
+                <!-- Right coll  -->
                 <div class="col-12 col-lg-9">
                     
                     <div class="card block-shadow border25 mb-3">
                         <div class="card-body">
 
+                            <div class="alert alert-info" v-if="guide.active === 0">
+                                Внимание! Профиль находится на модерации! Эта страница доступна только вам!
+                            </div>
+
                             <div class="guide__about mb-4">
                                 <div class="title mb-2">Обо мне</div>
-                                <div class="guide__small">{{ guide.about }}</div>
+                                <div class="guide__small textarea-pre-wrap">{{ guide.about }}</div>
                             </div>
                             
                             <div class="guide__tours">
                                 <div class="title mb-3">Экскурсии</div>
                                 <div class="row">
-                                    <!-- @foreach ($guide->userTour as $tour) -->
-                                        <div class="col-12 col-sm-6 col-lg-4 mb-4">
-                                            <div class="border25">
-                                                <a href="">
-                                                    <!-- @if ($tour->avatar) -->
-                                                        <!-- <img src="{{ asset($tour->avatar) }}" alt="" class="border25 mb-3"> -->
-                                                    <!-- @else  -->
-                                                        <img src="~/assets/images/general/blank.png" alt="" class="border25 mb-3">
-                                                    <!-- @endif -->
-                                                </a>
-                                                <!-- <a href="" class="subtitle d-block mb-2">{{ $tour->name }}</a> -->
-                                                
-                                                <div class="d-block">
-                                                    <div class="tour-item__time mb-2" data-toggle="tooltip" data-placement="top" title="Длительность экскурсии">
-                                                        <i class="fas fa-history"></i>
-                                                        <span>4-5 часов</span>
-                                                    </div>
-                                                    <div class="tour-item__price">
-                                                        от 
-                                                        <!-- <span>{{ $tour->price }}</span> -->
-                                                        <span class="rubl"><i class="fas fa-ruble-sign"></i></span> 
-                                                        с группы
-                                                    </div>
+                                
+                                    <div class="col-12 col-sm-6 col-lg-4 mb-4" v-for="(tour, index) in guide.tour" :key="index">
+                                        <div class="border25">
+                                            <nuxt-link :to="'/guide/' + guide.id + '/tour/' + tour.id" class="border25 mb-3">
+                                                <img src="~/assets/images/general/blank.png" alt="" class="border25 mb-3" v-if="!tour.avatar" />
+                                                <img :src="baseImgPath + tour.avatar" alt="" class="border25 mb-3" v-if="tour.avatar" />
+                                            </nuxt-link>
+
+                                            <nuxt-link :to="'/guide/' + guide.id + '/tour/' + tour.id" class="subtitle d-block mb-2">
+                                                {{ tour.name }}
+                                            </nuxt-link>
+                                            
+                                            <div class="d-block">
+                                                <div class="tour-item__time mb-2" data-toggle="tooltip" data-placement="top" title="Длительность экскурсии">
+                                                    <i class="fas fa-history"></i>
+                                                    <span>{{ tour.tour_timing[0].name }}</span>
+                                                </div>
+                                                <div class="tour-item__price">
+                                                    от <span>{{ tour.price }}</span>
+                                                    <fa :icon="['fas', tour.tour_currency[0].iso_code]" /> 
+                                                    {{ tour.tour_price_type[0].name }}
                                                 </div>
                                             </div>
                                         </div>
-                                    <!-- @endforeach -->
-                                    <!-- @if (count($guide->userTour) == 0) -->
-                                        <div class="col-12">
-                                            <div class="alert alert-info">
-                                                У гида еще нет экскурсий
-                                            </div>
+                                    </div>
+
+                                    <div class="col-12" v-if="!guide.tour">
+                                        <div class="alert alert-info">
+                                            У гида еще нет экскурсий
                                         </div>
-                                    <!-- @endif -->
+                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -184,7 +181,9 @@ export default {
     },
 
     async asyncData({route, store, params, query, redirect, error}) {
-        return store.$axios.get(`guide/${params.id}`)
+        console.log(query);
+        
+        return store.$axios.get(`guide/${params.guide}`, {params: { preview: query.preview }})
             .then((res) => {
                 return { guide: res.data.data }
             })

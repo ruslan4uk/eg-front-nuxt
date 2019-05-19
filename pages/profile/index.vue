@@ -4,6 +4,10 @@
             <b-row>
                 <b-col lg="3" class="mb-4 mb-lg-0">
                     <ProfileAvatar url="/profile/upload-avatar" @change="setAvatar"/>
+                    <nuxt-link 
+                        :to="'/guide/' + user.id + '?preview=1'" 
+                        class="btn btn-sm btn-block btn-blue mt-3"
+                        v-if="user.active >= 0">Мой профиль</nuxt-link>
                 </b-col>
 
                 <b-col lg="9">

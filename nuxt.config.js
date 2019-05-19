@@ -44,6 +44,7 @@ export default {
     '@/plugins/axios',
     '@/plugins/interceptors',
     { src: '~/plugins/lazyload', ssr: false },
+    { src: '~/plugins/carousel', ssr: false },
   ],
 
   /*
