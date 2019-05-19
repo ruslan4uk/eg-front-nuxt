@@ -3,7 +3,7 @@
         <b-container>
             <b-row class="mt-5">
                 <b-col cols="12">
-                    <h3 class="mb-4">Экскурсии</h3>
+                    <h3 class="mb-4">Экскурсии  / {{categoryTitle()}}</h3>
                 </b-col>
 
                 <!-- Плашка переключатель -->
@@ -20,7 +20,8 @@
                         <div class="col-12 mb-3"><div class="tour-category__title">Категории экскурсий</div></div>
                        
                         <b-col cols="12" md="6" lg="3" v-for="(category, index) in helpers.category" :key="index">
-                            <nuxt-link :to="{ name: 'country-country-city-city-category', params: {country: $route.params.country, city: $route.params.city, category: category.id} }" class="tour-category__link mb-1">{{ category.name }}</nuxt-link>
+                            <nuxt-link :to="{ name: 'country-country-city-city-category', params: {country: $route.params.country, city: $route.params.city, category: category.id} }"
+                            class="tour-category__link mb-1">{{ category.name }}</nuxt-link>
                         </b-col>
 
                     </div>
@@ -46,7 +47,7 @@
 
                 <b-col cols="12" class="mt-4" v-if="tours.data.length === 0">
                     <div class="alert alert-danger border25 d-block pt-3 pb-3 text-center">
-                        В этом городе нет гидов! <a href="">Зарегистрируйтесь</a> и станьте первым прямо сейчас
+                        В этой категории не экскурсий! <a href="">Зарегистрируйтесь</a> и станьте первым прямо сейчас
                     </div>
                 </b-col>
                 
@@ -65,7 +66,7 @@ export default {
 
     head() {
         return{
-            title: 'Экскурсии'
+            title: 'Экскурсии / ' +  this.categoryTitle()
         }
     },
 
@@ -93,10 +94,6 @@ export default {
     },
 
     methods: {
-        linkCategory( cid ) {
-            return this.$route.path + '/category_' + cid
-        },
-
         linkGen(pageNum) {
             return { 
                 path: this.$route.path,
@@ -104,7 +101,9 @@ export default {
             }
         },
 
-        
+        categoryTitle() {
+            return this.helpers.category.find(x => x.id === Number(this.$route.params.category)).name
+        },
 
     },
 

@@ -5,7 +5,7 @@
             <div class="main-search__btn btn-gradient">От винта!</div>
             <div class="main-search__suggest" v-if="suggestFlag" v-click-outside="hide">
                 <div class="main-search__suggest-item" v-for="(item, index) in suggest" :key="index">
-                    <a :href="'country/' + item.city_country.id + '/city/' + item.id + '/tours'" class="main-search__suggest-link">
+                    <a :href="'country/' + item.city_country.id + '/city/' + item.id" class="main-search__suggest-link">
                         {{ item.name }}, {{ item.city_country.name }}
                     </a>
                 </div>

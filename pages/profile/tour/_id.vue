@@ -7,6 +7,9 @@
                         :url="'/profile/tour/upload-avatar/' + form.id"
                         :img="form.avatar"
                         @change="setAvatar"/>
+                    <div class="invalid-feedback d-block" v-if="errors.avatar">
+                        {{ errors.avatar[0] }}
+                    </div>
                 </b-col>
                 <b-col lg="9">
                     <b-form @submit.prevent="saveTour">
