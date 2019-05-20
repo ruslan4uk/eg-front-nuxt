@@ -181,7 +181,6 @@ export default {
     },
 
     async asyncData({route, store, params, query, redirect, error}) {
-        console.log(query);
         
         return store.$axios.get(`guide/${params.guide}`, {params: { preview: query.preview }})
             .then((res) => {
@@ -190,6 +189,7 @@ export default {
             .catch((e) => {
                 error({ statusCode: 404, message: 'Post not found' })
         })
+        
     },
 }
 </script>

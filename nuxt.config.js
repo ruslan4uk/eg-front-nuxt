@@ -42,7 +42,7 @@ export default {
     '@/plugins/mixins/validation',
     '@/plugins/mixins/user',
     '@/plugins/axios',
-    '@/plugins/interceptors',
+    //'@/plugins/interceptors',
     { src: '~/plugins/lazyload', ssr: false },
     { src: '~/plugins/carousel', ssr: false },
   ],
