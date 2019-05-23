@@ -3,8 +3,23 @@
         <div class="tour-item border25 block-shadow block-shadow-hover">
             
             <nuxt-link :to="'/profile/tour/' + item.id">
-                <img :src="baseImgPath + item.avatar" :alt="item.name" class="border25 mb-3" v-if="item.avatar">
-                <img src="~/assets/images/gif/loader.gif" v-lazy="require('~/assets/images/general/blank.png')" alt="" class="border25 mb-3" v-if="!item.avatar">
+            
+                <b-img-lazy 
+                    fluid-grow
+                    v-bind="{width: 50, height: 50, center: true, blank: true, blankColor: '#bbb',}" 
+                    :blank-src="require('~/assets/images/general/blank.png')"
+                    :src="baseImgPath + item.avatar" 
+                    class="border25 mb-3"
+                    v-if="item.avatar"></b-img-lazy>
+
+                <b-img-lazy 
+                    fluid-grow
+                    v-bind="{width: 50, height: 50, center: true, blank: true, blankColor: '#bbb',}" 
+                    :blank-src="require('~/assets/images/general/blank.png')"
+                    :src="require('~/assets/images/general/blank.png')" 
+                    class="border25 mb-3"
+                    v-if="!item.avatar"></b-img-lazy>
+
             </nuxt-link>
 
             <nuxt-link :to="'/profile/tour/' + item.id" class="tour-item__title mb-3">{{ item.name }}</nuxt-link>

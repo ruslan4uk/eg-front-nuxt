@@ -100,7 +100,9 @@
                                     <div class="tour__about-icon mb-1">
                                         <fa :icon="['fas', 'money-bill-alt']"/>
                                     </div>
-                                    {{ tour.price }} <fa :icon="['fas', tour.tour_currency[0].iso_code]" /> 
+                                    {{ tour.price }} 
+                                    <fa :icon="['fas', tour.tour_currency[0].iso_code]" /> 
+                                    {{ tour.tour_price_type[0].name }}
                                 </div>
                             </div>
     

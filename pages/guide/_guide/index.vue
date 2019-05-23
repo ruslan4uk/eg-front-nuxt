@@ -19,9 +19,7 @@
                             <span :class="'mr-1 flag-icon flag-icon-' + language.iso_code + ' flag-icon-squared'"></span>
                             <span class="pb-1">{{ language.name }}</span></div>
                     </div> 
-                    
-                    
-                                           
+                                                               
                     <div class="mb-3">
                         <div class="subtitle mb-1">Услуги</div>
                         <div class="guide__small"
@@ -110,58 +108,71 @@
                         </div>
                     </div>
 
-                    <!-- {{-- Comment --}} -->
+                    <!-- Comment -->
                     <div class="card block-shadow border25 mb-3">
                         <div class="card-body">
                             <div class="title mb-3">Комментарии</div>
 
                             <div class="guide__comments">
-                                <!-- @if (count($comments) > 0) -->
-                                    <!-- @foreach ($comments as $comment) -->
-                                        <div class="row mb-4 pb-4 guide__comments-item">
-                                            <div class="col-4 col-md-2">
-                                                <!-- @if ($comment->userData->avatar) -->
-                                                    <!-- <a href="{{ route('guideIndex', $comment->userData->user_id) }}"> -->
-                                                        <!-- <img src="{{ asset($comment->userData->avatar) }}" alt="" class="border25 mb-3 mb-md-0"> -->
-                                                    <!-- </a> -->
-                                                <!-- @else  -->
-                                                    <a href="">
-                                                        <img src="https://via.placeholder.com/400" alt="" class="border25 mb-3 mb-md-0">
-                                                    </a>
-                                                <!-- @endif -->
-                                            </div>
-                                            <div class="col-12 col-md-10">
-                                                <!-- <a href="{{ route('guideIndex', $comment->userData->user_id) }}">
-                                                    <div class="title">{{$comment->user->name}}</div>
-                                                </a>
-                                                <div class="guide__small">
-                                                    {{$comment->text}}
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    <!-- @endforeach -->
-                                <!-- @else  -->
-                                    <div class="alert alert-info mb-3">
-                                        Гида пока никто не прокоментировал, сделайте это первыми
+                                
+                                <div class="row mb-4 pb-4 guide__comments-item"
+                                    v-for="(comment, index) in guide.user_comment" :key="index">
+                                    <div class="col-4 col-md-2">
+                                        <nuxt-link :to="{name: 'guide-guide', params: {guide: comment.id}}">
+                                            <b-img-lazy 
+                                                fluid-grow
+                                                v-bind="{width: 50, height: 50, center: true, blank: true, blankColor: '#bbb',}" 
+                                                :blank-src="require('~/assets/images/general/avatar-blank.jpg')"
+                                                :src="baseImgPath + comment.avatar" 
+                                                class="border25 mb-3"
+                                                v-if="comment.avatar"></b-img-lazy>
+
+                                            <b-img-lazy 
+                                                fluid-grow
+                                                v-bind="{width: 50, height: 50, center: true, blank: true, blankColor: '#bbb',}" 
+                                                :blank-src="require('~/assets/images/general/avatar-blank.jpg')"
+                                                :src="require('~/assets/images/general/avatar-blank.jpg')" 
+                                                class="border25 mb-3"
+                                                v-if="!comment.avatar"></b-img-lazy>
+                                        </nuxt-link>
                                     </div>
-                                <!-- @endif -->
+                                    
+                                    <div class="col-12 col-md-10">
+                                        <nuxt-link :to="{name: 'guide-guide', params: {guide: comment.id}}">
+                                            <div class="title">{{ comment.name }}</div>
+                                        </nuxt-link>
+                                        <div class="guide__small mb-2"><small>{{ comment.pivot.created_at }}</small></div>
+                                        <div class="guide__small textarea-pre-wrap">{{ comment.pivot.text }}</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="alert alert-info mb-3" v-if="guide.user_comment.length === 0">
+                                    Гида пока никто не прокоментировал, сделайте это первыми
+                                </div>
+
+                                
+                               
                             </div>
                             
                             <div class="guide__comment">
-                                <!-- <form action="{{ route('addComment', $guide->id) }}" method="POST"> -->
-                                    <!-- @csrf -->
-                                    <div class="form-group">
-                                        <!-- <textarea name="comment" id="" rows="5" class="form-control border25 {{$errors->has('comment') ? ' is-invalid' : ''}}">{{ old('comment') }}</textarea> -->
-                                    </div>
-                                    <!-- @if ($errors->has('comment')) -->
-                                        <span class="invalid-feedback invalid-feedback--normal mb-2 d-block" role="alert">
-                                            <!-- <strong>{{ $errors->first('comment') }}</strong> -->
-                                        </span>
-                                    <!-- @endif -->
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-sm btn-blue">Отправить</button>
-                                    </div>
-                                <!-- </form> -->
+                                <div class="title mb-3">Написать комментарий</div>
+
+                                <div class="alert alert-info mb-3" v-if="!authenticated">
+                                    Вы не можете оставлять Комментарии, Вы должны <nuxt-link to="/auth/login">зарегистрироваться</nuxt-link>!
+                                </div>
+
+                                <b-form @submit.prevent="addComment" v-if="authenticated">
+                                    <b-form-group>
+                                        <textarea v-model="form.text" name="comment" id="" rows="5" class="form-control border25"></textarea>
+
+                                        <div class="invalid-feedback d-block" v-if="errors.text">
+                                            Поле обязательно для заполнения
+                                        </div>
+                                    </b-form-group>
+                                    <b-form-group>
+                                        <b-button type="submit" class="btn btn-sm btn-blue">Отправить</b-button>
+                                    </b-form-group>
+                                </b-form>
                             </div>
                         </div>
                     </div>
@@ -180,6 +191,14 @@ export default {
       return 'guide'
     },
 
+    data() {
+        return {
+            form: {
+                text: ''
+            }
+        }
+    },
+
     async asyncData({route, store, params, query, redirect, error}) {
         
         return store.$axios.get(`guide/${params.guide}`, {params: { preview: query.preview }})
@@ -190,6 +209,17 @@ export default {
                 error({ statusCode: 404, message: 'Post not found' })
         })
         
+    },
+
+    methods: {
+        addComment() {
+            this.$axios.post(
+                this.$route.path + '/comment', 
+                {text: this.form.text, user_id: this.user.id}
+            ).then(res => {
+                this.guide.user_comment = res.data.data.user_comment
+            })
+        },
     },
 }
 </script>
