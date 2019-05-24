@@ -67,7 +67,7 @@ export default {
 
         if( query.page) { page = '?page=' + query.page} else { page = ''}
 
-        return store.$axios.get('profile/tour-moderate/' + page)
+        return store.$axios.get('profile/tour-moderate' + page)
             .then((res) => {
                 if(query.page > res.data.data.last_page) 
                     error({ statusCode: 404, message: 'Page not found' })
