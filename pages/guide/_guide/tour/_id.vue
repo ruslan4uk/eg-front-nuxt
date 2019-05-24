@@ -88,7 +88,7 @@
                                     <div class="tour__about-icon mb-1">
                                         <fa :icon="['fas', 'history']"/>
                                     </div>
-                                    4 - 5 часов
+                                    {{ tour.tour_timing[0].name }}
                                 </div>
                                 <div class="col tour__about-item">
                                     <div class="tour__about-icon mb-1">
