@@ -52,6 +52,12 @@
                         </div>
                         <div class="navigation__submenu block-shadow mt-2" v-if="submenu">
                             <div class="navigation__submenu-item">
+                                <nuxt-link 
+                                    :to="'/guide/' + user.id + '?preview=1'" 
+                                    class="navigation__submenu-link"
+                                    v-if="user.active >= 0">Мой профиль</nuxt-link>
+                            </div>
+                            <div class="navigation__submenu-item">
                                 <nuxt-link to="/profile" class="navigation__submenu-link">Настройки профиля</nuxt-link>
                             </div>
                             <div class="navigation__submenu-item">

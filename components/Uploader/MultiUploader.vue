@@ -98,7 +98,7 @@ export default {
             &:after 
                 position: absolute
                 top: 50%
-                content: 'Загрузить лицензию'
+                content: 'Загрузить изображение'
                 text-align: center
                 max-width: 100% 
                 color: #405089
