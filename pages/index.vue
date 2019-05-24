@@ -14,7 +14,7 @@
       </div>
   </div>
 
-  <div class="main-popular mt-5 mb-3">
+  <!-- <div class="main-popular mt-5 mb-3">
       <div class="container">
           <div class="row">
               <div class="col-12">
@@ -28,7 +28,7 @@
               <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Лос Анжелес</a>
           </div>
       </div>
-  </div>
+  </div> -->
 </section>
 </template>
 
