@@ -218,6 +218,7 @@ export default {
                 {text: this.form.text, user_id: this.user.id}
             ).then(res => {
                 this.guide.user_comment = res.data.data.user_comment
+                this.form.text = ''
             })
         },
     },
