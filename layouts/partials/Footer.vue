@@ -13,9 +13,9 @@
                 <div class="col-12 col-md ml-auto mt-4 mt-md-0">
                     <div class="footer__social social">
                         <div class="social__list justify-content-center justify-content-md-end">
-                            <a href="" class="social__item"><fa :icon="['fab', 'twitter']" /></a>
-                            <a href="" class="social__item"><fa :icon="['fab', 'vk']" /></a>
-                            <a href="" class="social__item"><fa :icon="['fab', 'facebook-f']" /></a>
+                            <a href="https://www.instagram.com/" class="social__item" target="_blank"><fa :icon="['fab', 'instagram']" /></a>
+                            <!-- <a href="" class="social__item"><fa :icon="['fab', 'vk']" /></a> -->
+                            <a href="https://www.facebook.com/excursguide1" target="_blank" class="social__item"><fa :icon="['fab', 'facebook-f']" /></a>
                         </div>
                     </div>
                 </div>
