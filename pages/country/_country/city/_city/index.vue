@@ -126,7 +126,7 @@ export default {
 <style scoped lang="sass">
 .tour-category
     &--is-close 
-        max-height: 8rem
+        max-height: 6rem
         overflow: hidden
         position: relative
         &:after
