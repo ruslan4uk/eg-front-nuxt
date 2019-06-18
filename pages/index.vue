@@ -5,7 +5,7 @@
           <div class="row justify-content-end">
               <div class="col-12 col-lg-6">
                   <div class="main__title mb-3">Все совершенно просто!</div>
-                  <div class="main__subtitle">Выберите страну и начните путешествие прямо сейчас</div>
+                  <div class="main__subtitle">Выберите город и начните путешествие прямо сейчас</div>
                   <div class="main__search">
                       <MainSearch />
                   </div>
