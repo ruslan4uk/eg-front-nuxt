@@ -36,6 +36,13 @@
 import MainSearch from '~/components/Frontend/MainSearch'
 
 export default {
+
+    head() {
+        return {
+            title: 'Excursguide - найти экскурсию и гида - легко!'
+        }
+    },
+
     layout (context) {
       return 'revers'
     },

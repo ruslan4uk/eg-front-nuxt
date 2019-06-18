@@ -52,6 +52,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/sitemap',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
@@ -72,6 +73,17 @@ export default {
       ]
     }]
   ],
+
+  /**
+   * Sitemap
+   */
+  sitemap: {
+    generate: true,
+    hostname: 'https://www.excursguide.ru',
+    exclude: [
+      '/profile'
+    ]
+  },
 
   /**
    * Auth
