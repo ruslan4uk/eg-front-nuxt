@@ -1,7 +1,7 @@
 {
   "name": "nuxt",
   "version": "1.0.0",
-  "description": "My grand Nuxt.js project",
+  "description": "ExcursGuide Frontend",
   "author": "Ruslan",
   "private": true,
   "scripts": {
@@ -24,6 +24,7 @@
     "node-sass": "^4.12.0",
     "nuxt": "^2.4.0",
     "nuxt-fontawesome": "^0.4.0",
+    "redirect-ssl": "^1.4.0",
     "sass-loader": "^7.1.0",
     "v-click-outside": "^2.1.3",
     "v-owl-carousel": "^1.0.8",
