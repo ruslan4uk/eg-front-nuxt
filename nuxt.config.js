@@ -105,7 +105,7 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'http://api.excursguide.ru/api/v1',
+    baseURL: 'https://api.excursguide.ru/api/v1',
   },
 
   /**
@@ -130,5 +130,5 @@ export default {
   },
 
   serverMiddleware: ['redirect-ssl'],
-  
+   
 }
