@@ -52,6 +52,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
     // Doc: https://axios.nuxtjs.org/usage
