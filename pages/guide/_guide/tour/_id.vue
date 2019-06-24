@@ -126,6 +126,12 @@
 <script>
 export default {
 
+    head() {
+        return {
+            title: 'Экскурсия частного гида: "' + this.tour.name + '" город ' + this.tour.tour_city[0].name + ' — «Еxcursguide ' + this.tour.tour_city[0].name + '»'
+        }
+    },
+
     async asyncData({route, store, params, query, redirect, error}) {
         console.log(query);
         

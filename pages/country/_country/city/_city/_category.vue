@@ -66,7 +66,7 @@ export default {
 
     head() {
         return{
-            title: 'Экскурсии / ' +  this.categoryTitle()
+            title: this.categoryTitle() + ' по городу ' + this.city_country.name + ' — «Еxcursguide ' + this.categoryTitle() + ' ' + this.city_country.name + '»'
         }
     },
 
@@ -80,7 +80,10 @@ export default {
 
         return store.$axios.get(route.path, {params: { page: query.page }})
             .then((res) => {
-                return { tours: res.data.data }
+                return { 
+                    tours: res.data.data,
+                    city_country: res.data.city_country   
+                }
             })
             .catch((e) => {
                 error({ statusCode: 404, message: 'Post not found' })

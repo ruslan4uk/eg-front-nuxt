@@ -1,5 +1,7 @@
 import pkg from './package'
 
+require('dotenv').config()
+
 export default {
   debug: false,
   
@@ -9,7 +11,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'Excursguide',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -53,7 +55,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    
+    '@nuxtjs/dotenv',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
     // Doc: https://axios.nuxtjs.org/usage
@@ -143,7 +145,7 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'https://api.excursguide.ru/api/v1',
+    baseURL: process.env.BASE_URL || 'https://api.excursguide.ru/api/v1',
   },
 
   /**

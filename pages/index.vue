@@ -49,6 +49,11 @@ export default {
 
     components: {
         MainSearch,
+    },
+
+    created () {
+        console.log(process.env.MODE == 'dev' ? 'http://localhost:8000' : 'https://api.excursguide.ru/api/v1');
+        
     }
 }
 </script>

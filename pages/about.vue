@@ -99,7 +99,11 @@
 
 <script>
     export default {
-        
+        head() {
+            return {
+                title: 'Еxcursguide - О проекте'
+            }
+        }
     }
 </script>
 

@@ -72,8 +72,8 @@ export default {
     watchQuery: ['page'],
 
     head() {
-        return{
-            title: 'Экскурсии'
+        return {
+            title: 'Экскурсии в городе ' + this.city_country.name + ' цены и описания — «Еxcursguide экускурсии ' + this.city_country.name + '»' 
         }
     },
 
@@ -93,7 +93,10 @@ export default {
 
         return store.$axios.get(route.path, {params: { page: query.page }})
             .then((res) => {
-                return { tours: res.data.data }
+                return { 
+                    tours: res.data.data,
+                    city_country: res.data.city_country
+                }
             })
             .catch((e) => {
                 error({ statusCode: 404, message: 'Post not found' })

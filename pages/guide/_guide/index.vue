@@ -187,6 +187,12 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: 'Гид Москва Калашников Виталий владимирович — екскурсгайд гид Москва'
+        }
+    },
+    
     layout (context) {
       return 'guide'
     },
