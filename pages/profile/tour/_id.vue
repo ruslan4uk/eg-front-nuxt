@@ -268,7 +268,7 @@ export default {
 
     head() {
         return {
-            title: this.form.name ? this.form.name : 'Создание тура'
+            title: this.form.name ? this.form.name + 'ExcursGuide' : 'Создание тура - ExcursGuide'
         }
     },
 
