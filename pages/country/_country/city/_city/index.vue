@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="footer-fix">
         <b-container>
             <b-row class="mt-5">
                 <b-col cols="12">

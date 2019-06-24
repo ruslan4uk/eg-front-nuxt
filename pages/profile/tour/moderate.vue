@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="footer-fix">
         <b-container>
             <b-row class="mt-5">
                 <b-col cols="12">
@@ -96,6 +96,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="sass">
 
 </style>
