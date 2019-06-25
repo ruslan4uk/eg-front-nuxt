@@ -189,7 +189,7 @@
 export default {
     head() {
         return {
-            title: 'Гид Москва Калашников Виталий владимирович — екскурсгайд гид Москва'
+            title: 'Гид ' + this.guide.name + ' — Excursguide гид Москва'
         }
     },
     
