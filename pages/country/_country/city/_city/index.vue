@@ -3,7 +3,7 @@
         <b-container>
             <b-row class="mt-5">
                 <b-col cols="12">
-                    <h3 class="mb-4">Экскурсии</h3>
+                    <h3 class="mb-4">Экскурсии {{ city_country.name }}</h3>
                 </b-col>
 
                 <!-- Плашка переключатель -->

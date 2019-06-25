@@ -66,7 +66,7 @@ export default {
 
     head() {
         return{
-            title: this.categoryTitle() + ' по городу ' + this.city_country.name + ' — «Еxcursguide ' + this.categoryTitle() + ' ' + this.city_country.name + '»'
+            title: this.customTitle()
         }
     },
 
@@ -106,6 +106,31 @@ export default {
 
         categoryTitle() {
             return this.helpers.category.find(x => x.id === Number(this.$route.params.category)).name
+        },
+
+        customTitle() {
+            console.log('Route', this.$route.params.category);
+            
+            switch (this.$route.params.category) {
+                case 9: 
+                    return this.categoryTitle() + ' - экскурсия по городу ' + this.city_country.name + ' — «Еxcursguide ' + this.categoryTitle() + '»'
+                    break;
+                case 13:
+                    return 'Экскурсии с трансфером в городе ' + this.city_country.name + ' — «Еxcursguide трансферы»';
+                    break;
+                case 15:
+                    return 'Экскурсия квест в городе ' + this.city_country.name + ' — «Еxcursguide квесты';
+                    break;
+                case 17: 
+                    return 'Экскурсионное восхождение в горы ' + this.city_country.name + ' — «Еxcursguide восхождение в горы';
+                    break;
+                case 27: 
+                    return 'Экскурсии по достопримечательностям в городе ' + + this.city_country.name + ' — «Еxcursguide экскурсии по достопримечательностям';
+                    break;
+                default:
+                    return this.categoryTitle() + ' по городу ' + this.city_country.name + ' — «Еxcursguide ' + this.categoryTitle() + '»'
+                    break;
+            }
         },
 
     },

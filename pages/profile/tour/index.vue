@@ -57,7 +57,7 @@ export default {
 
     head() {
         return {
-            title: 'Список Ваших туров - ExcursGuide'
+            title: 'Мои экскурсии - ExcursGuide'
         }
     },
 

@@ -180,7 +180,7 @@ export default {
 
     head() {
         return {
-            title: 'Настройка профиля' + this.form.name + ' - ExcursGuide'
+            title: 'Настройка профиля - ' + this.form.name + ' - ExcursGuide'
         }
     },
 

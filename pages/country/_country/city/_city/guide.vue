@@ -3,7 +3,7 @@
         <b-container>
             <b-row class="mt-5">
                 <b-col cols="12">
-                    <h3 class="mb-4">Гиды</h3>
+                    <h3 class="mb-4">Гиды {{ city_country.name }}</h3>
                 </b-col>
 
                 <!-- Плашка переключатель -->
@@ -57,12 +57,21 @@ export default {
         NavCity, 
     },
 
+    head() {
+        return {
+            title: 'Экскурсионный гид город ' + this.city_country.name + ' услуги, цены — «Еxcursguide гиды ' + this.city_country.name + '»' 
+        }
+    },
+
     async asyncData({route, store, params, query, redirect, error}) {
         await store.dispatch('helpers/all/getHelpers')
 
         return store.$axios.get(route.path, {params: { page: query.page }})
             .then((res) => {
-                return { guide: res.data.data }
+                return { 
+                    guide: res.data.data, 
+                    city_country: res.data.city_country
+                }
             })
             .catch((e) => {
                 error({ statusCode: 404, message: 'Post not found' })

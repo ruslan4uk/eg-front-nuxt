@@ -3,7 +3,7 @@
         <b-container>
             <b-row class="mt-5">
                 <b-col cols="12">
-                    <h3 class="mb-4">Достопримечательности</h3>
+                    <h3 class="mb-4">Достопримечательности {{ city_country.name }}</h3>
                 </b-col>
 
                 <!-- Плашка переключатель -->
@@ -59,12 +59,20 @@ export default {
         NavCity, 
     },
     
+    head() {
+        return {
+            title: 'Достопримечательности города ' + this.city_country.name + ', описание и фото — «Еxcursguide достопримечательности ' + this.city_country.name + '»' 
+        }
+    },
 
     async asyncData({route, store, params, query, redirect, error}) {
 
         return store.$axios.get(route.path, {params: { page: query.page }})
             .then((res) => {
-                return { articles: res.data.data }
+                return { 
+                    articles: res.data.data,
+                    city_country: res.data.city_country
+                }
             })
             .catch((e) => {
                 error({ statusCode: 404, message: 'Article not found' })

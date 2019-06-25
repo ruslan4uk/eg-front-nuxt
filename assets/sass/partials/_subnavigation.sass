@@ -4,11 +4,13 @@
     display: block
     border-radius: 30px
     &__lay
-        overflow: hidden
+        @media (min-width: 768px)
+            overflow: hidden
     &__list 
         padding: 0.85rem 1rem
         overflow-x: scroll
-        margin-bottom: -17px
+        @media (min-width: 768px)
+            margin-bottom: -17px
     &__item
         padding: 0.5rem 2rem
         margin-right: 1rem
