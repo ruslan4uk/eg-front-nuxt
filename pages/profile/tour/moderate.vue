@@ -8,10 +8,12 @@
 
                 <!-- Плашка переключатель -->
                 <b-col cols="12" class="mb-5">
-                    <div class="subnavigation border25">
-                        <div class="subnavigation__list d-flex">
-                            <nuxt-link to="/profile/tour" exact class="subnavigation__item border25">Активные</nuxt-link>
-                            <nuxt-link to="/profile/tour/moderate" class="subnavigation__item border25">На модерации</nuxt-link>
+                    <div class="subnavigation">
+                        <div class="subnavigation__lay">
+                            <div class="subnavigation__list d-flex">
+                                <nuxt-link to="/profile/tour" exact class="subnavigation__item border25">Активные</nuxt-link>
+                                <nuxt-link to="/profile/tour/moderate" class="subnavigation__item border25">На модерации</nuxt-link>
+                            </div>
                         </div>
                     </div>
                 </b-col>
