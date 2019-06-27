@@ -1,5 +1,5 @@
 <template>
-    <section class="auth mt-md-5">
+    <section class="auth mt-md-5 footer-fix">
         <b-container>
             <b-row class="align-items-center justify-content-center justify-content-lg-between">
                 <b-col md="8" lg="6" class="mb-5">
@@ -74,6 +74,8 @@
 
 <script>
     export default {
+        middleware: ['noGuest'],
+
         data() {
             return {
                 form: {

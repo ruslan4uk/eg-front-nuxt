@@ -50,7 +50,7 @@
 import TourItem from '~/components/Items/TourItem'
 
 export default {
-    middleware: ['auth'],
+    middleware: ['auth', 'emailConfirm'],
 
     watchQuery: ['page'],
 

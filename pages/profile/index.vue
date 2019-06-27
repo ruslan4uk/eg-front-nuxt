@@ -167,7 +167,7 @@ import MultiUploader from '~/components/Uploader/MultiUploader'
 import ProfileAvatar from '~/components/Uploader/ProfileAvatar'
     
 export default {
-    middleware: ['auth'],
+    middleware: ['auth', 'emailConfirm'],
 
     components: { 
         Tags, 
