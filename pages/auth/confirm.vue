@@ -27,10 +27,6 @@
 
         asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
 
-            if(!query.mail && !query.hash) {
-                error({ statusCode: 404, message: '' })
-            }
-
             return store.$axios.post(route.path, {mail: query.mail, hash: query.hash })
                 .then((res) => {
                     return { account_confirm: true }
