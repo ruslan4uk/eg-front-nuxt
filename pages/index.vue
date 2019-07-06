@@ -14,21 +14,54 @@
       </div>
   </div>
 
-  <!-- <div class="main-popular mt-5 mb-3">
-      <div class="container">
-          <div class="row">
-              <div class="col-12">
-                  <h4 class="mb-5">Популярные направления</h4>
-              </div>
-              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Рим</a>
-              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Москва</a>
-              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Санкт - Питербург</a>
-              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Нижний Новгород</a>
-              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Нью - Йорк</a>
-              <a href="" class="col-12 col-md-4 col-lg-3 main-popular__link mb-2">Лос Анжелес</a>
-          </div>
-      </div>
-  </div> -->
+    <div class="main-prefooter mt-5">
+        <div class="container">
+            <div class="row flex-lg-row-reverse justify-content-between align-items-center">
+                <div class="col-12 col-lg-6 mb-4">
+                    <img src="~assets/images/main/main_1.jpg" alt="">
+                </div>
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="main-prefooter__title mb-3">Вы гид?</div>
+                    <p class="main-prefooter__text">Замечательно! Регистрируйтесь бесплатно на сайте, 
+                    выкладывайте свои экскурсии с описанием и фотографиями, 
+                    привлекая туристов со всего Мира! Не жалейте слов и фотографий, 
+                    потому что яркое описание и привлекательные изображения 
+                    обязательно приведут туристов именно к вам</p>
+                </div>
+            </div>
+
+            <!-- 2col -->
+            <div class="row justify-content-between align-items-center">
+                <div class="col-12 col-lg-6 mb-4">
+                    <img src="~assets/images/main/main_2.jpg" alt="">
+                </div>
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="main-prefooter__title mb-3">Ооо! Да вы турист!</div>
+                    <p class="main-prefooter__text">Собрались отправиться в отпуск? Хочется приключений? 
+                    Начните свое путешествие прямо сейчас. Просто выберете 
+                    интересующий вас город в поиске и отправляйтесь в тур 
+                    по гидам, найдя самую интересную экскурсию, которая сделает 
+                    ваш отдых еще более увлекательным</p>
+                </div>
+            </div>
+
+            <!-- 3col -->
+            <div class="row flex-lg-row-reverse justify-content-between align-items-center">
+                <div class="col-12 col-lg-6 mb-4">
+                    <img src="~assets/images/main/main_3.jpg" alt="">
+                </div>
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="main-prefooter__title mb-3">Держим курс только вперед!</div>
+                    <p class="main-prefooter__text mb-4">И будьте уверены, мы не останавливаемся на достигнутом. 
+                    Мы обязательно будем совершенствоваться, для того, чтобы вам 
+                    было удобнее и приятнее пользоваться нашим сервисом Excursguide.</p>
+                    
+                    <p class="main-prefooter__text">От винта, друзья!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 </template>
 
@@ -57,3 +90,13 @@ export default {
     }
 }
 </script>
+
+<style lang="sass">
+.main-prefooter
+    &__title
+        color: #585f76
+        font-size: 2rem
+    &__text
+        font-weight: 300
+        color: #585f76
+</style>
