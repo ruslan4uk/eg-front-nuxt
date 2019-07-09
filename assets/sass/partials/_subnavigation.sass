@@ -9,6 +9,10 @@
     &__list 
         padding: 0.85rem 1rem
         overflow-x: scroll
+        &::-webkit-scrollbar-track,
+        &::-webkit-scrollbar,
+        &::-webkit-scrollbar-thumb
+            height: 16px
         @media (min-width: 768px)
             margin-bottom: -17px
     &__item

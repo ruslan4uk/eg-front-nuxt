@@ -5,8 +5,8 @@
             <div class="col-12 col-lg-3 tour__left pr-lg-4 mb-4">
                 <div class="tour__guide border25 py-4 mb-3">
                     <div class="title mb-3">Гид</div>
-                    <div class="d-flex align-items-center mb-4">
-                        <nuxt-link :to="'/guide/' + guide.id" class="tour__guide-avatar mr-3">
+                    <div class="mb-4">
+                        <nuxt-link :to="'/guide/' + guide.id" class="tour__guide-avatar mb-3">
                             <img :src="baseImgPath + guide.avatar" alt="" class="border25" v-if="guide.avatar">
                             <img src="~/assets/images/general/avatar-blank.jpg" alt="" class="border25" v-if="!guide.avatar">
                         </nuxt-link>
