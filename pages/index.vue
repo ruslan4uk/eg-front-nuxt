@@ -48,6 +48,19 @@
             <!-- 3col -->
             <div class="row flex-lg-row-reverse justify-content-between align-items-center">
                 <div class="col-12 col-lg-6 mb-4">
+                    <img src="~assets/images/main/main_4.jpg" alt="">
+                </div>
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="main-prefooter__title mb-3">Можно все! И даже чуточку больше</div>
+                    <p class="main-prefooter__text mb-4">Размещайте не только свои интересные экскурсии! Добавьте
+                        авторские туры, аренду авто, а может быть даже проведение
+                        свадебной церемонии. И это еще не весь список!</p>
+                </div>
+            </div>
+
+            <!-- 4col -->
+            <div class="row flex-lg-row-reverse justify-content-between align-items-center">
+                <div class="col-12 col-lg-6 mb-4">
                     <img src="~assets/images/main/main_3.jpg" alt="">
                 </div>
                 <div class="col-12 col-lg-6 mb-4">

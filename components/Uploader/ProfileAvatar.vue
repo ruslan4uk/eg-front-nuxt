@@ -18,7 +18,7 @@
 
 <script>
 export default {
-    props: ['url'],
+    props: ['url', 'descr'],
 
     data() {
         return {

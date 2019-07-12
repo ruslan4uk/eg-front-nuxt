@@ -1,6 +1,6 @@
 <template>
     <div class="col-12 col-lg-6 mb-4">
-        <div class="tour-item border25 block-shadow block-shadow-hover d-flex">
+        <div class="tour-item border25 block-shadow block-shadow-hover d-md-flex">
 
             <!-- <div class="tour-item__left"> -->
             <nuxt-link 
@@ -83,17 +83,23 @@ export default {
 .tour-item
     padding: 0
     &__left
-        width: 35%
-        flex: 0 0 35%
-        min-height: 15rem
+        width: 100%
+        display: block
+        min-height: 20rem
         background-size: cover
         background-position: center center
-        border-radius: 25px 0 0 25px
+        border-radius: 25px 25px 0 0
+        @media (min-width: 768px)
+            min-height: 15rem
+            width: 35%
+            flex: 0 0 35%
+            border-radius: 25px 0 0 25px
     &__right 
-        width: 65%
-        flex: 0 0 65%
         padding: 1rem
         position: relative
+        @media (min-width: 768px) 
+            width: 65%
+            flex: 0 0 65%
     &__about
         font-size: 0.875rem
     

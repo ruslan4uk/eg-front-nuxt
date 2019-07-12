@@ -2,7 +2,7 @@
     <b-col cols="12" class="mb-4">
         <div class="subnavigation">
             <div class="subnavigation__lay">
-                <div class="subnavigation__list d-flex">
+                <div class="subnavigation__list">
                     <nuxt-link 
                         exact
                         class="subnavigation__item border25"
