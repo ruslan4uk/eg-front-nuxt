@@ -59,7 +59,7 @@
             </div>
 
             <!-- 4col -->
-            <div class="row flex-lg-row-reverse justify-content-between align-items-center">
+            <div class="row flex-lg-row-reverse justify-content-between align-items-center mt-5">
                 <div class="col-12 col-lg-6 mb-4">
                     <img src="~assets/images/main/main_3.jpg" alt="">
                 </div>

@@ -255,7 +255,7 @@ import MultiUploader from '~/components/Uploader/MultiUploader'
 import TourAvatar from '~/components/Uploader/TourAvatar'
 
 export default {
-    middleware: ['auth', 'emailConfirm'],
+    middleware: ['auth', 'emailConfirm', 'checkRole'],
 
     components: { 
         Tags,

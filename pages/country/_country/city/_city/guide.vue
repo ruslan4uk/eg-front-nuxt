@@ -18,7 +18,8 @@
                     <b-row>
                         <b-col cols="4" md="2" class="d-none d-md-block">
 
-                            <nuxt-link :to="{ name: 'guide-guide', params: { guide: item.id } }">
+                            <nuxt-link :to="{ name: 'guide-guide', params: { guide: item.id } }" class="position-relative d-block">
+                                <FavoriteBadge :userId="item.id" type="guide"></FavoriteBadge>
                                 <img :src="baseImgPath + item.avatar" alt="" class="border25 mb-3" v-if="item.avatar">
                                 <img src="~assets/images/general/blank.png" alt="" class="border25 mb-3" v-if="!item.avatar">
                             </nuxt-link>
@@ -49,12 +50,14 @@
 
 <script>
 import NavCity from '~/components/Frontend/NavCity'
+import FavoriteBadge from '~/components/Frontend/FavoriteBadge'
 
 export default {
     watchQuery: ['page'],
 
     components: { 
         NavCity, 
+        FavoriteBadge,
     },
 
     head() {

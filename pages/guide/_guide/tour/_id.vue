@@ -55,7 +55,8 @@
 
             <div class="col-12 col-lg-9 tour__right">
                 <div class="tour__title mb-3">{{ tour.name }}</div>
-                <div class="tour__slider" v-if="tour.tour_image.length > 0">
+                <div class="tour__slider position-relative" v-if="tour.tour_image.length > 0">
+                    <FavoriteBadge :userId="tour.id" type="tour"></FavoriteBadge>
                     <b-carousel
                         id="carousel-1"
                         :interval="4000"
@@ -124,12 +125,18 @@
 </template>
 
 <script>
+import FavoriteBadge from '~/components/Frontend/FavoriteBadge'
+
 export default {
 
     head() {
         return {
             title: 'Экскурсия частного гида: "' + this.tour.name + '" город ' + this.tour.tour_city[0].name + ' — «Еxcursguide ' + this.tour.tour_city[0].name + '»'
         }
+    },
+
+    components: { 
+        FavoriteBadge,
     },
 
     async asyncData({route, store, params, query, redirect, error}) {

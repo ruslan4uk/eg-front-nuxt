@@ -49,7 +49,7 @@
 import TourItem from '~/components/Items/TourItem'
 
 export default {
-    middleware: ['auth', 'emailConfirm'],
+    middleware: ['auth', 'emailConfirm', 'checkRole'],
 
     watchQuery: ['page'],
 

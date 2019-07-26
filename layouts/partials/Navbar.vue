@@ -60,10 +60,10 @@
                             <div class="navigation__submenu-item">
                                 <nuxt-link to="/profile" class="navigation__submenu-link">Настройки профиля</nuxt-link>
                             </div>
-                            <div class="navigation__submenu-item">
+                            <div class="navigation__submenu-item" v-if="user.role !== 'tourist'">
                                 <a href="" @click.prevent="createTour" class="navigation__submenu-link">Добавить экскурсию</a>
                             </div>
-                            <div class="navigation__submenu-item">
+                            <div class="navigation__submenu-item" v-if="user.role !== 'tourist'">
                                 <nuxt-link to="/profile/tour" class="navigation__submenu-link">Мои экскурсии</nuxt-link>
                             </div>
                             <div class="navigation__submenu-item">
@@ -97,7 +97,8 @@ export default {
 
     computed: {
         ...mapGetters({
-            loggedIn: 'auth/loggedIn'
+            loggedIn: 'auth/loggedIn',
+            loggedIn: 'auth/user'
         })
     },
 

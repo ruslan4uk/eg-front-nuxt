@@ -6,7 +6,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-3 pr-lg-4 mb-4 text-center text-md-left">
-                    <div class="guide__avatar mb-3">
+                    <div class="guide__avatar mb-3 position-relative">
+                        <FavoriteBadge :userId="guide.id" type="guide"></FavoriteBadge>
                         <img :src="baseImgPath + guide.avatar" alt="" class="border25" v-if="guide.avatar">
                         <img src="~/assets/images/general/avatar-blank.jpg" alt="" class="border25" v-if="!guide.avatar">
                     </div>
@@ -186,7 +187,10 @@
 </template>
 
 <script>
+import FavoriteBadge from '~/components/Frontend/FavoriteBadge'
+
 export default {
+    
     head() {
         return {
             title: 'Гид ' + this.guide.name + ' — Excursguide гид Москва'
@@ -195,6 +199,10 @@ export default {
     
     layout (context) {
       return 'guide'
+    },
+
+    components: { 
+        FavoriteBadge,
     },
 
     data() {

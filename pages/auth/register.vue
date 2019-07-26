@@ -34,13 +34,29 @@
                                 </div>
                             </b-form-group>
 
-                            <b-form-group class="custom-input">
+                            <b-form-group class="custom-input mb-3">
                                 <b-input v-model="form.password_confirmation" id="password-confirm" placeholder="Повторите пароль"></b-input>
                                 <label for="password-confirm">Повторите пароль</label>
                                 <div class="invalid-feedback d-block" v-if="errors.password_confirmation">
                                     {{ errors.password_confirmation[0] }}
                                 </div>
                             </b-form-group>
+
+                            <!-- radio -->
+                            <b-form-group>
+                                <div class="custom-radio form-check-inline">
+                                    <input name="role" type="radio" value="tourist" id='role_1' v-model="form.role" />
+                                    <label for="role_1" class="mb-0">Я турист</label>
+                                </div>
+                                <div class="custom-radio form-check-inline">
+                                    <input name="role" type="radio" value="guide" id='role_2' v-model="form.role" />
+                                    <label for="role_2" class="mb-0">Я гид</label>
+                                </div>
+                                <div class="invalid-feedback d-block" v-if="errors.role">
+                                    {{ errors.role[0] }}
+                                </div>
+                            </b-form-group>
+                            <!-- end radio -->
 
                             <b-form-group class="custom-checkbox mb-4">
                                 <input v-model="form.check_data" class="form-check-input" type="checkbox" value="" id="defaultCheck1">
@@ -83,7 +99,8 @@
                     email: '',
                     password: '',
                     password_confirmation: '', 
-                    check_data: ''         
+                    check_data: '',
+                    role: null,
                 }
             }
         },
