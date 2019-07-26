@@ -22,6 +22,7 @@
             </b-row>
         </b-container>
 
+        <noindex>
         <b-modal id="modal-politic" size="lg" title="Политика кофиденциальности">
             <div class="politic">
                 <p>Веб-сайт <strong>EXCURSGUIDE</strong> (далее — <strong>EXCURSGUIDE</strong>, мы, нас, наш и другие 
@@ -570,6 +571,7 @@
                 </b-button>
             </div>
         </b-modal>
+        </noindex>
     </section>
 </template>
 
