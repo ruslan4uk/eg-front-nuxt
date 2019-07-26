@@ -2,9 +2,9 @@
     <div class="trst">
         <section class="container">
             <div class="row">
-                <div class="col-12 col-lg-3">
+                <b-col cols="12" lg="3" class="mb-4">
                     <LeftNavigation />
-                </div>
+                </b-col>
                 <div class="col-12 col-lg-9">
                     <b-card class="block-shadow border25 mb-4 trst-favorite">
                         <div class="card-title mb-4 mt-2">Избранные гиды</div>

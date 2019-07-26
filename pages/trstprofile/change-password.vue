@@ -2,9 +2,9 @@
     <div class="trst footer-fix">
         <section class="container">
             <div class="row">
-                <div class="col-12 col-lg-3">
+                <b-col cols="12" lg="3" class="mb-4">
                     <LeftNavigation />
-                </div>
+                </b-col>
                 <div class="col-12 col-lg-9">
 
                     <b-card class="block-shadow border25 mb-4">

@@ -2,7 +2,7 @@
     <div class="trst footer-fix">
         <b-container>
             <b-row>
-                <b-col cols="12" lg="3" class="mb-5 d-none d-lg-block">
+                <b-col cols="12" lg="3" class="mb-4">
                     <LeftNavigation />
                 </b-col>
                 <b-col cols="12" lg="9">
