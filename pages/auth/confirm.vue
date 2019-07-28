@@ -5,16 +5,15 @@
                 <b-col cols="12" lg="6" class="text-center mb-5">
                     <img src="~assets/images/auth/confirm.png" alt="">
                 </b-col>
-                <b-col cols="12" lg="6" class="mb-5">
+                <b-col cols="12" lg="6" class="mb-5" v-if="!account_confirm">
                     <div class="auth__title mb-2">Осталось еще чуть-чуть</div>
                     <div class="auth__subtitle mb-3">Чтобы завершить регистрацию подтвердите свой эл.адрес</div>
-                    <!-- <a href="" class="btn btn-blue" @click.prevent="reloadData()">Обновить</a> -->
                 </b-col>
-                <!-- <b-col cols="12" lg="6" class="mb-5" v-if="account_confirm">
-                    <div class="auth__title mb-2">Осталось еще чуть-чуть</div>
-                    <div class="auth__subtitle mb-3">Ваш аккаунт успешно подтвержден</div>
-                    <nuxt-link to="/" class="btn btn-blue">На главную</nuxt-link>
-                </b-col> -->
+                <b-col cols="12" lg="6" class="mb-5" v-if="account_confirm">
+                    <div class="auth__title mb-2">Эл. адрес подтвержден</div>
+                    <div class="auth__subtitle mb-3">Теперь вы можете войти в свой личный кабинет</div>
+                    <nuxt-link to="/auth/login" class="btn btn-blue">Вход в личный кабинет</nuxt-link>
+                </b-col>
             </b-row>
         </b-container>
     </section>

@@ -73,6 +73,9 @@
                             </b-form-group>
                         </b-form>
                     </div>
+                    <div class="alert alert-success" v-if="mail_confirm">
+                        <p>На ваш эл. адрес выслано письмо для подтверждения</p>
+                    </div>
                     <!-- Social auth btn -->
                     <div class="auth__social d-flex align-items-center">
                         <span>Вы также можете войти через</span>
@@ -101,7 +104,8 @@
                     password_confirmation: '', 
                     check_data: '',
                     role: null,
-                }
+                },
+                mail_confirm: false
             }
         },
 
@@ -115,7 +119,11 @@
                         solid: true,
                         toaster: 'b-toaster-bottom-right',
                     })                    
-                    this.$router.push({path: '/auth/login'})
+                    // this.$router.push({path: '/auth/login'})
+                    this.mail_confirm = true 
+                    setTimeout(() => {
+                        this.$router.push({path: '/auth/confirm'})
+                    }, 5000);
                 })
             }
         },
