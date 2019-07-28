@@ -101,7 +101,12 @@
     export default {
         head() {
             return {
-                title: 'Еxcursguide - О проекте'
+                title: 'Еxcursguide - О проекте',
+                meta: [{ 
+                    hid: 'description', 
+                    name: 'description', 
+                    content: 'Забудьте о жесткой привязанности к графику экскурсии, корректируйте свой маршрут и находите новых друзей в лице ваших гидов.'
+                }],
             }
         }
     }
