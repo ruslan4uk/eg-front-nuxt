@@ -2,6 +2,8 @@ import pkg from './package'
 
 require('dotenv').config()
 
+import getSitemap from './utils/getSitemap'
+
 export default {
   debug: false,
   
@@ -105,12 +107,23 @@ export default {
   /**
    * Sitemap
    */
+  
   sitemap: {
-    generate: true,
-    hostname: 'https://www.excursguide.ru',
-    exclude: [
-      '/guide'
-    ]
+    routes() {
+      return getSitemap();
+    },
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lastmod: new Date(),
+      lastmodrealtime: true
+    }
+    // generate: true,
+    // hostname: 'https://www.excursguide.ru',
+    // gzip: true,
+    // exclude: [
+    //   '/guide'
+    // ]
   },
 
   /**
