@@ -2,6 +2,7 @@
     <section class="tour">
     <div class="container">
         <div class="row">
+
             <div class="col-12 col-lg-3 tour__left pr-lg-4 mb-4">
                 <div class="tour__guide border25 py-4 mb-3">
                     <div class="title mb-3">Гид</div>
@@ -54,6 +55,20 @@
             </div>
 
             <div class="col-12 col-lg-9 tour__right">
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb border25 px-0 pt-0 pb-1">
+                        <li class="breadcrumb-item">
+                            <nuxt-link to="/">Главная</nuxt-link>                            
+                        </li>
+                        <li class="breadcrumb-item">
+                            <nuxt-link :to="{ name: 'country-country', params: {country: tour.tour_city[0].city_country.id} }">{{ tour.tour_city[0].city_country.name }}</nuxt-link>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <nuxt-link :to="{ name: 'country-country-city-city', params: {country: tour.tour_city[0].city_country.id, city: tour.tour_city[0].id} }">{{ tour.tour_city[0].name }}</nuxt-link>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ tour.name }}</li>
+                    </ol>
+                </div>
                 <div class="tour__title mb-3">{{ tour.name }}</div>
                 <div class="tour__slider position-relative" v-if="tour.tour_image.length > 0">
                     <FavoriteBadge :userId="tour.id" type="tour"></FavoriteBadge>

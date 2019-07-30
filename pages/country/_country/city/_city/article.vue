@@ -6,6 +6,24 @@
                     <h3 class="mb-4">Достопримечательности {{ city_country.name }}</h3>
                 </b-col>
 
+                <!-- breadcrumbs -->
+                <b-col>
+                    <div aria-label="breadcrumb">
+                        <ol class="breadcrumb border25 px-0">
+                            <li class="breadcrumb-item">
+                                <nuxt-link to="/">Главная</nuxt-link>                            
+                            </li>
+                            <li class="breadcrumb-item">
+                                <nuxt-link :to="{ name: 'country-country', params: {country: city_country.city_country.id} }">{{ city_country.city_country.name }}</nuxt-link>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <nuxt-link :to="{ name: 'country-country-city-city', params: {country: city_country.city_country.id, city: city_country.id} }">{{ city_country.name }}</nuxt-link>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Достопримечательности</li>
+                        </ol>
+                    </div>
+                </b-col>
+
                 <!-- Плашка переключатель -->
                 <NavCity></NavCity>
 
