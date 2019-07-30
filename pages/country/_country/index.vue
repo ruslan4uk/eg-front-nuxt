@@ -12,8 +12,8 @@
             <b-container>
                 <b-row>
                     <b-col cols="12">
-                        <div class="d-flex justify-content-between">
-                            <div class="d-inline py-2" v-for="(item, index) in 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЫЬЭЮЯ'.split('')" :key="index">
+                        <div class="d-lg-flex justify-content-between country__navigation-list">
+                            <div class="d-inline py-2 px-2" v-for="(item, index) in 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЫЬЭЮЯ'.split('')" :key="index">
                                 <nuxt-link 
                                     exact
                                     :class="$route.query.litter === item ? 'active' : ''"
@@ -91,6 +91,10 @@ export default {
             &:hover, &.active
                 border-bottom: 3px solid #0056b3
                 color: #0056b3
+        &-list 
+            overflow-y: scroll
+            @media (min-width: 1000px)
+                overfloy-y: none
 
     &__link
         color: #777
