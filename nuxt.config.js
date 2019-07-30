@@ -18,7 +18,8 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description },
-      { name: 'yandex-verification', content: '1b17652caa4578f5' }
+      { name: 'yandex-verification', content: '1b17652caa4578f5' },
+      { name: 'google-site-verification', content: 'Jrlf7j1xzEEYlhh8m_Og-nz5Q2Q2zJ_Wch1oqOJCIk4' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/fav_64x64.png' },
