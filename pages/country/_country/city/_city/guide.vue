@@ -34,7 +34,7 @@
             <b-row>
                 <b-col cols="12" class="mb-3 mt-3" v-for="(item, index) in guide.data" :key="index">
                     <b-row>
-                        <b-col cols="12" md="2" class="guide-item-avatar">
+                        <b-col cols="12" md="2" class="d-none d-md-block guide-item-avatar">
 
                             <nuxt-link :to="{ name: 'guide-guide', params: { guide: item.id } }" class="position-relative d-block">
                                 <FavoriteBadge :userId="item.id" type="guide"></FavoriteBadge>
@@ -45,15 +45,48 @@
                         </b-col>
                         <b-col cols="12" md="10">
                             <div class="guide-item border25">
+
+                                <nuxt-link :to="{ name: 'guide-guide', params: { guide: item.id } }" class="pt-3 position-relative d-block d-md-none">
+                                    <FavoriteBadge :userId="item.id" type="guide"></FavoriteBadge>
+                                    <img :src="baseImgPath + item.avatar" alt="" class="border25 mb-3" v-if="item.avatar">
+                                    <img src="~assets/images/general/blank.png" alt="" class="border25 mb-3" v-if="!item.avatar">
+                                </nuxt-link>
+
                                 <nuxt-link :to="{ name: 'guide-guide', params: { guide: item.id } }" class="guide-item__name mb-2">
                                     {{ item.name }}
                                 </nuxt-link>
-                                <div class="guide-item__count-tour mb-2">{{ item.tour_count }} {{ declOfNum(item.tour_count, ['экскурсия', 'экскурсии', 'экскурсий']) }}</div>
-                                <div class="guide-item__about mb-3">{{ sliceText(item.about) }}</div>
-                                <div class="d-flex justify-content-end align-item-center">
-                                    <nuxt-link :to="{ name: 'guide-guide', params: { guide: item.id } }" class="guide-item__more">
-                                        Подробнее <fa :icon="['fas', 'angle-right']" />
-                                    </nuxt-link>
+                                <div class="d-none d-md-block">
+                                    <div class="guide-item__count-tour mb-2">{{ item.tour_count }} {{ declOfNum(item.tour_count, ['экскурсия', 'экскурсии', 'экскурсий']) }}</div>
+                                    <div class="guide-item__about mb-3">{{ sliceText(item.about) }}</div>
+                                    <div class="d-flex justify-content-end align-item-center">
+                                        <nuxt-link :to="{ name: 'guide-guide', params: { guide: item.id } }" class="guide-item__more">
+                                            Подробнее <fa :icon="['fas', 'angle-right']" />
+                                        </nuxt-link>
+                                    </div>
+                                </div>
+                                <div class="d-block d-md-none guide-item-mobile">
+                                    <div class="guide-item-mobile__services mb-3">
+                                        <div class="guide-item-mobile__title mb-1">Услуги</div>
+                                        <div class="guide-item-mobile__item mb-1"
+                                            v-for="(item, index) in item.user_service" :key="index">
+                                            {{ item.name }}
+                                        </div>
+                                    </div>
+                                    <div class="guide-item-mobile__city mb-3">
+                                        <div class="guide-item-mobile__title mb-1">Города проживания</div>
+                                        <div class="guide-item-mobile__item mb-1"
+                                            v-for="(item, index) in item.user_city" :key="index">
+                                            <fa :icon="['fas', 'map-marker-alt']" />
+                                            {{ item.name }}, {{ item.city_country }}
+                                        </div>
+                                    </div>
+                                    <div class="guide-item-mobile__contact">
+                                        <div class="guide-item-mobile__title mb-1">Контакты</div>
+                                        <div class="guide-item-mobile__item mb-1"
+                                            v-for="(item, index) in item.user_contact_type" :key="index">
+                                            {{ item.text }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </b-col>
@@ -119,4 +152,11 @@ export default {
 <style scoped lang="sass">
 .guide-item-avatar img
     width: 100%
+
+.guide-item-mobile
+    &__title
+        font-size: 1rem
+        font-weight: 400
+    &__item
+        font-size: 0.825rem
 </style>
