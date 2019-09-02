@@ -34,7 +34,7 @@
             <b-row>
                 <b-col cols="12" class="mb-3 mt-3" v-for="(item, index) in guide.data" :key="index">
                     <b-row>
-                        <b-col cols="4" md="2" class="d-none d-md-block">
+                        <b-col cols="12" md="2" class="guide-item-avatar">
 
                             <nuxt-link :to="{ name: 'guide-guide', params: { guide: item.id } }" class="position-relative d-block">
                                 <FavoriteBadge :userId="item.id" type="guide"></FavoriteBadge>
@@ -116,6 +116,7 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="sass">
+.guide-item-avatar img
+    width: 100%
 </style>
