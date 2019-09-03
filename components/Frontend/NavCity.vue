@@ -10,9 +10,9 @@
                     <nuxt-link 
                         class="subnavigation__item border25"
                         :to="{ name: 'country-country-city-city-guide', params: {country: $route.params.country, city: $route.params.city} }">Гиды</nuxt-link>
-                    <nuxt-link 
+                    <!-- <nuxt-link 
                         class="subnavigation__item border25"
-                        :to="{ name: 'country-country-city-city-article', params: {country: $route.params.country, city: $route.params.city} }">Достопримечательности</nuxt-link>
+                        :to="{ name: 'country-country-city-city-article', params: {country: $route.params.country, city: $route.params.city} }">Достопримечательности</nuxt-link> -->
                 </div>
             </div>
         </div>
