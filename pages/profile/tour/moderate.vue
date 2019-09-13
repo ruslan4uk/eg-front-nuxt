@@ -20,20 +20,21 @@
 
                 <b-col cols="12">
                     <b-row v-if="data.data.length > 0">
-                        <TourItem 
+                        <TourItem
                             v-for="(item,index) in data.data"
                             :key="index"
-                            :item="item" />
+                            :item="item"
+                            @deleteTour="deleteTour"/>
                     </b-row>
                 </b-col>
-                
+
                 <b-col cols="12" v-if="data.total > data.per_page">
-                    <b-pagination-nav 
+                    <b-pagination-nav
                         class="mt-3 custom-pagination"
                         align="center"
-                        :link-gen="linkGen" 
-                        :number-of-pages="data.last_page" 
-                        use-router />           
+                        :link-gen="linkGen"
+                        :number-of-pages="data.last_page"
+                        use-router />
                 </b-col>
 
                 <b-col cols="12" v-if="data.data.length === 0">
@@ -49,13 +50,14 @@
 <script>
 import TourItem from '~/components/Items/TourItem'
 
+
 export default {
     middleware: ['auth', 'emailConfirm', 'checkRole'],
 
     watchQuery: ['page'],
 
-    components: { 
-        TourItem 
+    components: {
+        TourItem,
     },
 
     head() {
@@ -65,13 +67,13 @@ export default {
     },
 
     async asyncData({ store, params, query, redirect, error}) {
-        let page 
+        let page;
 
         if( query.page) { page = '?page=' + query.page} else { page = ''}
 
         return store.$axios.get('profile/tour-moderate' + page)
             .then((res) => {
-                if(query.page > res.data.data.last_page) 
+                if(query.page > res.data.data.last_page)
                     error({ statusCode: 404, message: 'Page not found' })
                 return { data: res.data.data }
             })
@@ -82,7 +84,7 @@ export default {
 
     methods: {
         linkGen(pageNum) {
-            return { 
+            return {
                 path: '/profile/tour/moderate',
                 query: pageNum !== 1 ? { page: pageNum } : null
             }
@@ -93,6 +95,20 @@ export default {
                 this.$router.push({path: '/profile/tour/' + res.data.data.id})
             })
         },
+
+        deleteTour(tour_id) {
+            this.$axios.delete('/profile/tour/' + tour_id ).then(res => {
+                this.data.data  = this.data.data.filter(x => x.id !== tour_id);
+                this.$root.$emit('bv::hide::modal', 'tour-item-' + tour_id, '#btnShow');
+                this.$bvToast.toast('Экскурсия успешно удалена', {
+                    title: 'Внимание!',
+                    autoHideDelay: 5000,
+                    variant: 'success',
+                    solid: true,
+                    toaster: 'b-toaster-bottom-right',
+                })
+            })
+        }
     },
 
 }

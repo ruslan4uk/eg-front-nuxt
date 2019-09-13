@@ -1,12 +1,12 @@
 import pkg from './package'
 
-require('dotenv').config()
+require('dotenv').config();
 
 import getSitemap from './utils/getSitemap'
 
 export default {
   debug: false,
-  
+
   mode: 'universal',
 
   /*
@@ -30,7 +30,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { 
+  loading: {
     color: '#2185d0',
     height: '5px',
   },
@@ -85,7 +85,6 @@ export default {
       '@nuxtjs/yandex-metrika',
       {
         id: '54142261',
-        webvisor: true,
         clickmap:true,
         // useCDN:false,
         trackLinks:true,
@@ -108,7 +107,7 @@ export default {
   /**
    * Sitemap
    */
-  
+
   sitemap: {
     routes() {
       return getSitemap();
@@ -134,7 +133,6 @@ export default {
     plugins: [
       '~/plugins/axios'
     ],
-    watchLoggedIn: true,
     strategies: {
       local: {
         endpoints: {
@@ -184,5 +182,5 @@ export default {
   },
 
   serverMiddleware: ['redirect-ssl'],
-   
+
 }
