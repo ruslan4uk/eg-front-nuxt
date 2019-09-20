@@ -1,27 +1,29 @@
 <template>
     <div class="trst-left-nav">
         <ul class="trst-left-nav__list border25 block-shadow">
-            <nuxt-link to="/trstprofile" 
+            <nuxt-link to="/trstprofile"
                 class="trst-left-nav__item" exact>Профиль</nuxt-link>
-            <nuxt-link to="/trstprofile/favorite-guide" 
+            <nuxt-link to="/trstprofile/favorite-guide"
                 class="trst-left-nav__item">Избранные гиды</nuxt-link>
-            <nuxt-link to="/trstprofile/favorite-tour" 
+            <nuxt-link to="/trstprofile/favorite-tour"
                 class="trst-left-nav__item">Избранные экскурсии</nuxt-link>
-            <nuxt-link to="/trstprofile/change-password" 
-                class="trst-left-nav__item">Смена пароля</nuxt-link>
+            <nuxt-link to="/trstprofile/change-password"
+                 class="trst-left-nav__item">Смена пароля</nuxt-link>
+            <nuxt-link to="/trstprofile/messenger"
+                 class="trst-left-nav__item">Сообщения</nuxt-link>
         </ul>
     </div>
 </template>
 
 <script>
 export default {
-    
+
 }
 </script>
 
 <style lang="sass" scoped>
 .trst-left-nav
-    &__list 
+    &__list
         margin: 0
         padding: 1rem 0
         border: 1px solid #efefef
@@ -42,6 +44,6 @@ export default {
             transition: all ease 0.3s
         &.active, &:hover
             color: #111111
-            &:before 
+            &:before
                 left: -0.875rem
 </style>

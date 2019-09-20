@@ -36,7 +36,8 @@
     "vue-click-outside": "^1.0.7",
     "vue-country-flag": "^1.1.1",
     "vue-flag-icon": "^1.0.6",
-    "vue-lazyload": "^1.2.6"
+    "vue-lazyload": "^1.2.6",
+    "vue2-perfect-scrollbar": "^1.2.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
