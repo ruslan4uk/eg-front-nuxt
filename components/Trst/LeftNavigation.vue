@@ -9,8 +9,6 @@
                 class="trst-left-nav__item">Избранные экскурсии</nuxt-link>
             <nuxt-link to="/trstprofile/change-password"
                  class="trst-left-nav__item">Смена пароля</nuxt-link>
-            <nuxt-link to="/trstprofile/messenger"
-                 class="trst-left-nav__item">Сообщения</nuxt-link>
         </ul>
     </div>
 </template>

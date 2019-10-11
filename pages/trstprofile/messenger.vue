@@ -18,7 +18,7 @@
 
 <script>
     import LeftNavigation from '~/components/Trst/LeftNavigation'
-    import Messenger from '~/components/Messenger/Chat'
+    import Messenger from '~/components/Messenger/Main'
     export default {
         name: "messenger",
         components: {

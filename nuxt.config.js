@@ -52,6 +52,7 @@ export default {
     //'@/plugins/interceptors',
     { src: '~/plugins/lazyload', ssr: false },
     { src: '~/plugins/carousel', ssr: false },
+    { src: '~/plugins/laravelEcho', ssr: false },
   ],
 
   /*
@@ -157,7 +158,8 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: process.env.BASE_URL || 'https://api.excursguide.ru/api/v1',
+    browserBaseURL: process.env.BASE_URL || 'https://api.excursguide.ru/api/v1',
+    baseURL: 'http://nginx:8080/api/v1',
   },
 
   /**

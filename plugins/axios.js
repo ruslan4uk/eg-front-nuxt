@@ -2,7 +2,7 @@ import { get } from 'lodash'
 export default function({ $axios, store, app, redirect }) {
 
     $axios.interceptors.response.use(response => {
-        const newtoken = get(response, 'headers.authorization')        
+        const newtoken = get(response, 'headers.authorization')
         if (newtoken) {
             store.$auth.setToken('local', newtoken);
         }
@@ -10,19 +10,19 @@ export default function({ $axios, store, app, redirect }) {
     }, error => {
         //console.log(error.response.data);
 
-        if(error.response.status === 401) {
+        if(error.response && error.response.status === 401) {
             store.$auth.reset()
             store.$auth.logout();
             console.log(store.$auth.getToken('local'));
         }
 
-        if(error.response.data.message === "The token has been blacklisted") {
+        if(error.response && error.response.data.message === "The token has been blacklisted") {
                 store.$auth.reset()
                 store.$auth.logout();
                 console.log(store.$auth.getToken('local'));
         }
 
-        switch (error.response.status) {            
+        switch (error.response && error.response.status) {
             case 401:
             store.$auth.reset()
             store.$auth.logout();

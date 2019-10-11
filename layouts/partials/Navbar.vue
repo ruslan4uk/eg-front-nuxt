@@ -1,5 +1,5 @@
 <template>
-    <section :class="'navigation mb-5' 
+    <section :class="'navigation mb-5'
         + [revers ? ' navigation--revers navigation--main' : '']
         + [blue ? ' navigation--revers navigation--revers-blue' : '']
         ">
@@ -23,7 +23,7 @@
                             <span class="navigation__burger-span"></span>
                             <span class="navigation__burger-span"></span>
                             <span class="navigation__burger-span"></span>
-                        </div>    
+                        </div>
                         <div class="navigation__submenu block-shadow mt-2" v-if="submenu">
                             <div class="navigation__submenu-item">
                                 <nuxt-link to="/auth/login" class="navigation__submenu-link">Вход</nuxt-link>
@@ -42,7 +42,13 @@
                     </div>
                     <!-- End guest block -->
                     <!-- Auth user block  -->
-                    <div class="navigation__user" v-if="authenticated" v-click-outside="submenuClose">
+                    <div class="navigation__user d-flex align-items-center" v-if="authenticated" v-click-outside="submenuClose">
+
+                        <NuxtLink to="/trstprofile/messenger" class="navigation__user-messenger mr-3 position-relative">
+                          <fa :icon="['fas', 'envelope-open-text']" />
+                          <div class="navigation__user-badge" v-if="unreadMessage > 0">{{ unreadMessage }}</div>
+                        </NuxtLink>
+
                         <div class="navigation__name d-flex justify-content-end align-items-center" @click="submenu = !submenu">
                             <span>{{ user.name }}</span>
                             <div class="navigation__avatar ml-3">
@@ -52,8 +58,8 @@
                         </div>
                         <div class="navigation__submenu block-shadow mt-2" v-if="submenu">
                             <div class="navigation__submenu-item">
-                                <nuxt-link 
-                                    :to="'/guide/' + user.id + '?preview=1'" 
+                                <nuxt-link
+                                    :to="'/guide/' + user.id + '?preview=1'"
                                     class="navigation__submenu-link"
                                     v-if="user.active >= 0">Мой профиль</nuxt-link>
                             </div>
@@ -71,7 +77,7 @@
                             </div>
 
                             <form id="js--logout-form" action="" method="POST" style="display: none;">
-                                
+
                             </form>
                         </div>
                     </div>
@@ -97,8 +103,9 @@ export default {
 
     computed: {
         ...mapGetters({
+            unreadMessage: 'auth/unreadMessage',
             loggedIn: 'auth/loggedIn',
-            loggedIn: 'auth/user'
+            loggedIn: 'auth/user',
         })
     },
 
@@ -111,13 +118,13 @@ export default {
             if(event.target.className !== 'navigation__burger-span')
                 this.submenu = false
         },
-        
+
         async createTour() {
             await this.$axios.get('profile/tour/create').then(res => {
                 this.$router.push({path: '/profile/tour/' + res.data.data.id})
             })
         },
-        
+
     },
 
     watch: {

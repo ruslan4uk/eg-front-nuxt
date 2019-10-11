@@ -23,6 +23,9 @@ export default {
         },
         loggedIn(state) {
             return state.loggedIn
+        },
+        unreadMessage (state) {
+            return state.user.unreadMessage
         }
     },
 
@@ -34,12 +37,18 @@ export default {
         SET_LICENSE(state, payload) {
             state.user.user_license = payload
         },
-        SET_AVATAR(state, payload) {            
+        SET_AVATAR(state, payload) {
             state.user.avatar = payload
+        },
+        UPDATE_UNREAD (state, payload) {
+          state.user.unreadMessage = state.user.unreadMessage + payload
+        },
+        DELETE_UNREAD (state, payload) {
+          state.user.unreadMessage = payload
         }
     },
 
     actions: {
-        
+
     }
 }
