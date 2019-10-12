@@ -18,7 +18,10 @@
 <script>
     import Messenger from '~/components/Messenger/Main'
     export default {
+        middleware: ['auth', 'emailConfirm', 'checkRole'],
+
         name: "messenger",
+
         components: {
             Messenger
         },
