@@ -12,7 +12,7 @@
 
         <div class="messenger-attach" v-if="attach">
             <b-row class="m-0 mt-3">
-              <b-col cols="6" md="4" lg="3" class="p-1 mb-1" v-for="(item, index) in attach" v-if="item.type === 'image'">
+              <b-col cols="6" md="4" lg="3" class="p-1 mb-1" v-for="(item, index) in attach" :key="index" v-if="item.type === 'image'">
                 <div class="messenger-attach__image position-relative">
                   <img :src="item.path.path_crop" alt="">
                   <div class="messenger-attach__delete" @click="deleteAttach(index)">

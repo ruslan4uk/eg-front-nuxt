@@ -39,7 +39,7 @@
 
                           <!-- Attach -->
                           <div class="messenger-messages__attach d-flex flex-wrap" v-if="item.attach">
-                            <div class="messenger-messages__attach-item " v-for="(attach, index) in item.attach" v-if="attach.type === 'image'">
+                            <div class="messenger-messages__attach-item " v-for="(attach, index) in item.attach" :key="index" v-if="attach.type === 'image'">
                               <div class="messenger-messages__attach-image mt-1 pr-1 pb-1" >
                                 <div v-b-modal.modal-md @click="sendToModalUrl(attach.path.path_full)">
                                   <b-img-lazy :src="attach.path.path_crop"></b-img-lazy>
