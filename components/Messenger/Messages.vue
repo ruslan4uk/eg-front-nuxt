@@ -41,7 +41,7 @@
                           <div class="messenger-messages__attach d-flex flex-wrap" v-if="item.attach">
                             <div class="messenger-messages__attach-item " v-for="(attach, index) in item.attach" :key="index" v-if="attach.type === 'image'">
                               <div class="messenger-messages__attach-image mt-1 pr-1 pb-1" >
-                                <div v-b-modal.modal-md @click="sendToModalUrl(attach.path.path_full)">
+                                <div @click="sendToModalUrl(attach.path.path_full)"> <!-- v-b-modal.modal-md -->
                                   <img :src="attach.path.path_crop" v-if="attach.path.path_crop" alt="">
                                 </div>
                               </div>
@@ -69,8 +69,8 @@
           </div>
         </div>
 
-        <b-modal id="modal-md" size="lg" dialog-class="justify-content-center" body-class="p-0" content-class="d-flex w-auto" centered hide-footer hide-header title="Extra Large Modal">
-          <img :src="modalImageUrl" v-if="modalImageUrl" class="modal-image" alt="" />
+        <b-modal id="modal-md" size="lg" dialog-class="justify-content-center" body-class="p-0" content-class="d-flex w-auto" centered hide-footer hide-header>
+          <img :src="modalImageUrl" class="modal-image" alt="" />
         </b-modal>
 
       </div>
@@ -192,12 +192,12 @@
 
             sendToModalUrl(url) {
                 this.modalImageUrl = url;
+                this.$bvModal.show('modal-md')
             }
 
         },
 
         mounted() {
-            console.log('mount');
             this.getMessages(this.$route.query.sel, true);
 
             if (process.browser) {
@@ -207,16 +207,21 @@
             this.listenMessage();
 
         },
-        // destroyed () {
-        //     if (process.browser) {
-        //         document.querySelector('.messenger-messages__outer').removeEventListener('scroll', this.handleChatScroll);
-        //     }
-        // },
+
+        destroyed () {
+            if (process.browser) {
+                document.querySelector('.messenger-messages__outer').removeEventListener('scroll', this.handleChatScroll);
+            }
+        },
 
         watch: {
             '$route.query.sel': function (newVal,oldVal) {
                 this.messages = [];
                 this.getMessages(newVal, true);
+
+                if (process.browser) {
+                    document.querySelector('.messenger-messages__outer').addEventListener('scroll', this.handleChatScroll);
+                }
 
                 window.Echo.leave(`messenger-dialog.${oldVal}`);
                 this.listenMessage();
