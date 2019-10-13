@@ -103,7 +103,7 @@ export default {
 
     computed: {
         ...mapGetters({
-            // unreadMessage: 'auth/unreadMessage',
+            unreadMessage: 'auth/unreadMessage',
             loggedIn: 'auth/loggedIn',
             // loggedIn: 'auth/user',
         })
