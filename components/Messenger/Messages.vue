@@ -42,7 +42,7 @@
                             <div class="messenger-messages__attach-item " v-for="(attach, index) in item.attach" :key="index" v-if="attach.type === 'image'">
                               <div class="messenger-messages__attach-image mt-1 pr-1 pb-1" >
                                 <div v-b-modal.modal-md @click="sendToModalUrl(attach.path.path_full)">
-                                  <b-img-lazy :src="attach.path.path_crop"></b-img-lazy>
+                                  <img :src="attach.path.path_crop" v-if="attach.path.path_crop" alt="">
                                 </div>
                               </div>
                             </div>
@@ -70,7 +70,7 @@
         </div>
 
         <b-modal id="modal-md" size="lg" dialog-class="justify-content-center" body-class="p-0" content-class="d-flex w-auto" centered hide-footer hide-header title="Extra Large Modal">
-          <b-img-lazy :src="modalImageUrl" v-if="modalImageUrl" class="modal-image"></b-img-lazy>
+          <img :src="modalImageUrl" v-if="modalImageUrl" class="modal-image" alt="" />
         </b-modal>
 
       </div>
