@@ -2,7 +2,7 @@
   <div>
     <button class="btn btn-blue btn-block btn-sendmail mt-2" @click="newMessageModal = !newMessageModal">Написать сообщение</button>
 
-    <b-modal v-model="newMessageModal" centered hide-footer	class="messenger-new">
+    <b-modal v-model="newMessageModal" centered hide-footer	modal-class="messenger-new">
       <template v-slot:modal-title>Написать сообщение</template>
       <div class="messenger-new__user d-flex align-items-center">
         <img :src="touser.avatar" alt="" v-if="touser.avatar" class="messenger-new__avatar rounded-circle mr-3">

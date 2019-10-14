@@ -61,7 +61,7 @@
 
         methods: {
             sendMessage() {
-                if(this.text.length < 1) return;
+                if(this.text.length < 1 && this.attach.length < 1) return;
                 this.$emit('send', {text: this.text, attach: this.attach});
                 this.text = '';
                 this.attach = [];
