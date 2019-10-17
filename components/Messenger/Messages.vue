@@ -3,7 +3,7 @@
 
     <div class="messenger-title border-bottom position-relative py-2 px-3" v-if="dialog && dialog.user_dialog_from" >
       Диалог с {{ dialog.user_dialog_from.name }}
-      <NuxtLink to="/trstprofile/messenger" class="messenger-close position-absolute d-md-none">
+      <NuxtLink :to="(user.role === 'tourist' ? '/trstprofile' : '/profile') + '/messenger'" class="messenger-close position-absolute d-md-none">
         <fa :icon="['fas', 'times']" />
       </NuxtLink>
     </div>

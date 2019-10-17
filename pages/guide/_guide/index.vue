@@ -11,7 +11,7 @@
                         <img :src="baseImgPath + guide.avatar" alt="" class="border25" v-if="guide.avatar">
                         <img src="~/assets/images/general/avatar-blank.jpg" alt="" class="border25" v-if="!guide.avatar">
 
-                        <NewMessage :touser="guide"></NewMessage>
+                        <NewMessage :touser="guide" v-if="authenticated"></NewMessage>
 
                     </div>
 
