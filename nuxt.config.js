@@ -159,7 +159,7 @@ export default {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     browserBaseURL: process.env.BASE_URL || 'https://api.excursguide.ru/api/v1',
-    baseURL: process.env.DOCKER ? 'http://nginx:8080/api/v1' : 'https://api.excursguide.ru/api/v1',
+    baseURL: process.env.DOCKER ? 'http://nginx/api/v1' : 'https://api.excursguide.ru/api/v1',
   },
 
   /**
