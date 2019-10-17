@@ -44,7 +44,7 @@
                     <!-- Auth user block  -->
                     <div class="navigation__user d-flex align-items-center" v-if="authenticated" v-click-outside="submenuClose">
 
-                        <NuxtLink to="/trstprofile/messenger" class="navigation__user-messenger mr-3 position-relative">
+                        <NuxtLink :to="(user.role === 'tourist' ? '/trstprofile' : '/profile') + '/messenger'" class="navigation__user-messenger mr-3 position-relative">
                           <fa :icon="['fas', 'envelope-open-text']" />
                           <div class="navigation__user-badge" v-if="unreadMessage > 0">{{ unreadMessage }}</div>
                         </NuxtLink>
