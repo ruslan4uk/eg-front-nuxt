@@ -7,7 +7,7 @@ window.io = require('socket.io-client');
 
 window.Echo = new Echo({
   broadcaster: 'socket.io',
-  host: 'ws.' + window.location.hostname + ':6001',
+  host: 'ws.' + window.location.hostname,
   auth: {headers: {Authorization: token}}
 });
 
