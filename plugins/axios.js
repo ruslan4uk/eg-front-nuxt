@@ -1,6 +1,10 @@
 import { get } from 'lodash'
 export default function({ $axios, store, app, redirect }) {
 
+    if (process.client && window.location.hostname === 'www.excursguide.ru') {
+        redirect('excursguide.ru')
+    }
+
     $axios.interceptors.response.use(response => {
         const newtoken = get(response, 'headers.authorization')
         if (newtoken) {
