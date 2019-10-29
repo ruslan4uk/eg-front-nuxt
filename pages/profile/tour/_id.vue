@@ -1,9 +1,18 @@
 <template>
     <section class="profile mt-5">
-        <b-container>
+
+        <b-container v-if="user.active < 1" class="footer-fix">
+          <b-row>
+            <b-col>
+              <b-alert show variant="warning" class="p-4">Для добавления экскурсии вам необходимо заполнить свой профиль</b-alert>
+            </b-col>
+          </b-row>
+        </b-container>
+
+        <b-container v-if="user.active > 0">
             <b-row>
                 <b-col cols="8" lg="3" class="mb-4 mb-lg-0">
-                    <TourAvatar 
+                    <TourAvatar
                         :url="'/profile/tour/upload-avatar/' + form.id"
                         :img="form.avatar"
                         @change="setAvatar"/>
@@ -23,20 +32,20 @@
                                 </div>
                             </b-form-group>
 
-                            <CityDisabled 
+                            <CityDisabled
                                 v-if="form.city_id"
                                 :current="form.city_id"
                                 @delete="deleteLocation"></CityDisabled>
-                            
+
                             <div class="mb-4">
-                                <City 
+                                <City
                                     v-if="!form.city_id"
                                     @change="changeLocation"></City>
                                 <div class="invalid-feedback d-block" v-if="errors.city_id">
                                     {{ errors.city_id[0] }}
                                 </div>
                             </div>
-                            
+
 
                             <b-form-group class="custom-input mb-4">
                                 <b-input v-model="form.tour_route" placeholder="Маршрут экскурсии" id="tour_route"></b-input>
@@ -48,7 +57,7 @@
                             </b-form-group>
 
                             <b-form-group class="custon-input mb-4">
-                                <Tags label="Выберите язык" 
+                                <Tags label="Выберите язык"
                                     :selected="form.tour_language"
                                     :options="helpers.language"
                                     :err="errors.tour_language"
@@ -204,13 +213,13 @@
                         <b-card class="block-shadow border25 mb-4">
                             <div class="card-title mb-0">Расскажите туристам об экскурсии</div>
                             <div class="card-title-small mb-3">
-                                не использовать тексты с других сайтов. Проверить уникальность текста 
+                                не использовать тексты с других сайтов. Проверить уникальность текста
                                 <a href="text.ru" target="_blank">text.ru</a>
                             </div>
                             <b-form-group class="custom-input mb-0">
-                                <textarea wrap="soft" cols="30" rows="12" 
-                                        :class="'form-control' 
-                                                + [errors['user_data.about'] ? ' is-invalid' : '']" 
+                                <textarea wrap="soft" cols="30" rows="12"
+                                        :class="'form-control'
+                                                + [errors['user_data.about'] ? ' is-invalid' : '']"
                                         v-model="form.about"></textarea>
                                 <div class="invalid-feedback d-block" v-if="errors.about">
                                     {{ errors.about[0] }}
@@ -224,8 +233,8 @@
                             <div class="card-title-small mb-3"></div>
 
                             <MultiUploader
-                                :items="form.tour_image" 
-                                :url="'profile/tour/multi-upload/' + form.id" 
+                                :items="form.tour_image"
+                                :url="'profile/tour/multi-upload/' + form.id"
                                 :urldelete="'profile/tour/multi-upload/' + form.id + '/delete'"
                                 @change="changeImage"/>
 
@@ -238,7 +247,7 @@
                             <b-button type="submit" class="btn btn-sm btn-blue">Сохранить</b-button>
                         </b-form-group>
 
-                    </b-form> 
+                    </b-form>
                 </b-col>
             </b-row>
         </b-container>
@@ -257,7 +266,7 @@ import TourAvatar from '~/components/Uploader/TourAvatar'
 export default {
     middleware: ['auth', 'emailConfirm', 'checkRole'],
 
-    components: { 
+    components: {
         Tags,
         City,
         CityDisabled,
@@ -289,11 +298,11 @@ export default {
             helpers: 'helpers/all/helpers'
         }),
     },
-    
+
     methods: {
         saveTour() {
             console.log(this.form);
-            
+
             this.$axios.post('/profile/tour', this.form).then(res => {
                 this.$bvToast.toast(res.data.message, {
                     title: 'Внимание!',
@@ -313,7 +322,7 @@ export default {
             })
         },
         deleteLocation(id) {
-            this.form.city_id = null 
+            this.form.city_id = null
         },
 
         changeLocation(id) {
@@ -341,7 +350,7 @@ export default {
         },
 
         changePriceTypeId(id) {
-            this.form.price_type_id = id 
+            this.form.price_type_id = id
         },
 
         changeCurrencyId(id) {
