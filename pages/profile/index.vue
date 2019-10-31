@@ -3,12 +3,12 @@
         <b-container>
             <b-row>
                 <b-col lg="3" class="mb-4 mb-lg-0">
-                    <ProfileAvatar url="/profile/upload-avatar" @change="setAvatar"/>
+                    <ProfileAvatar url="/profile/upload-avatar" @change="changeAvatar"/>
                     <div class="invalid-feedback d-block mb-3" v-if="errors.avatar">
                         {{ errors.avatar[0] }}
                     </div>
-                    <nuxt-link 
-                        :to="'/guide/' + user.id + '?preview=1'" 
+                    <nuxt-link
+                        :to="'/guide/' + user.id + '?preview=1'"
                         class="btn btn-sm btn-block btn-blue mt-3"
                         v-if="user.active >= 0">Мой профиль</nuxt-link>
                 </b-col>
@@ -27,7 +27,7 @@
 
                             <div class="card-subtitle mb-3">Владение языками</div>
                             <b-form-group class="custon-input mb-4">
-                                <Tags label="Выберите язык" 
+                                <Tags label="Выберите язык"
                                     :selected="form.user_language"
                                     :options="helpers.language"
                                     :err="errors.user_language"
@@ -43,7 +43,7 @@
                             <b-row>
                                 <div class="col-12 col-md">
                                      <div v-if="form.user_city_ids.length > 0">
-                                        <CityDisabled 
+                                        <CityDisabled
                                             v-for="(user_city, index) in form.user_city_ids"
                                             :key="index"
                                             :current="user_city"
@@ -67,14 +67,14 @@
                             <b-row>
                                 <div class="col-12 col-md">
                                     <!-- TODO: Contacts -->
-                                    <Contacts 
+                                    <Contacts
                                         v-if="form.user_contact.length < 1"
                                         :item="{type: null, text: null}"
                                         :errors="errors"
                                         :indexes="0"
                                         @change="changeContact"
                                         @delete="deleteContact"></Contacts>
-                                    <Contacts 
+                                    <Contacts
                                         v-for="(contact, index) in form.user_contact" :key="index"
                                         :item="contact"
                                         :errors="errors"
@@ -91,18 +91,18 @@
                                     </div>
                                 </div>
                             </b-row>
-                            
-                           
+
+
                         </b-card>
 
                         <!-- Services -->
                         <b-card class="block-shadow border25 mb-4">
                             <div class="card-title mb-3">Услуги</div>
                             <b-form-group class="mb-2">
-                                <div class="custom-checkbox custom-checkbox--profile mr-4 mb-2" 
+                                <div class="custom-checkbox custom-checkbox--profile mr-4 mb-2"
                                     v-for="(service,index) in helpers.service" :key="index">
-                                    <input type="checkbox" 
-                                            :value="service.id" 
+                                    <input type="checkbox"
+                                            :value="service.id"
                                             v-model="form.user_service"
                                             :id="'service_' + index">
                                     <label class="form-check-label" :for="'service_' + index">{{ service.name }}</label>
@@ -117,13 +117,13 @@
                         <b-card class="block-shadow border25 mb-4">
                             <div class="card-title mb-0">Расскажите туристам о себе</div>
                             <div class="card-title-small mb-3">
-                                не использовать тексты с других сайтов. Проверить уникальность текста 
+                                не использовать тексты с других сайтов. Проверить уникальность текста
                                 <a href="text.ru" target="_blank">text.ru</a>
                             </div>
                             <b-form-group class="custom-input mb-0">
-                                <textarea wrap="soft" cols="30" rows="12" 
-                                        :class="'form-control' 
-                                                + [errors['user_data.about'] ? ' is-invalid' : '']" 
+                                <textarea wrap="soft" cols="30" rows="12"
+                                        :class="'form-control'
+                                                + [errors['user_data.about'] ? ' is-invalid' : '']"
                                         v-model="form.about"></textarea>
                                 <div class="invalid-feedback d-block" v-if="errors.about">
                                     {{ errors.about[0] }}
@@ -135,10 +135,10 @@
                         <b-card class="block-shadow border25 mb-4">
                             <div class="card-title mb-0">Лицензия гида</div>
                             <div class="card-title-small mb-3">Если у Вас есть лицензия, обязательно покажите ее, это повысит уровень доверия к Вам</div>
-                            
+
                             <MultiUploader
-                                :items="form.user_license" 
-                                url="/profile/multi-upload" 
+                                :items="form.user_license"
+                                url="/profile/multi-upload"
                                 urldelete="/profile/multi-upload/delete"
                                 @change="changeLicense"/>
 
@@ -165,14 +165,14 @@ import CityDisabled from '~/components/CityDisabled'
 import Contacts from '~/components/Contacts'
 import MultiUploader from '~/components/Uploader/MultiUploader'
 import ProfileAvatar from '~/components/Uploader/ProfileAvatar'
-    
+
 export default {
     middleware: ['auth', 'emailConfirm', 'checkRole'],
 
-    components: { 
-        Tags, 
-        City, 
-        CityDisabled, 
+    components: {
+        Tags,
+        City,
+        CityDisabled,
         MultiUploader,
         ProfileAvatar,
         Contacts,
@@ -189,7 +189,7 @@ export default {
             addCity: false
         }
     },
-   
+
     asyncData ({store}) {
         return {
             form: Object.assign({}, store.state.auth.user),
@@ -235,13 +235,13 @@ export default {
         },
 
         changeLanguage(id) {
-            this.form.user_language = this.form.user_language.concat(id);     
+            this.form.user_language = this.form.user_language.concat(id);
         },
         deleteLanguage(id) {
-            this.form.user_language = this.form.user_language.filter(x => x !== id);   
+            this.form.user_language = this.form.user_language.filter(x => x !== id);
         },
         changeLocation(id){
-            this.form.user_city_ids = this.form.user_city_ids.concat(id);   
+            this.form.user_city_ids = this.form.user_city_ids.concat(id);
         },
         deleteLocation(id) {
             this.form.user_city_ids = this.form.user_city_ids.filter(x => x !== id);
@@ -253,13 +253,15 @@ export default {
         },
 
         changeAvatar(url) {
-            this.form.avatar = url
+            this.form.avatar = url;
+            // console.log(url)
+            this.setAvatar(url);
         },
 
         addContact() {
             if (this.form.user_contact.length < 5)
                 this.form.user_contact = this.form.user_contact.concat({type: null, text: null})
-            else 
+            else
                 this.$bvToast.toast('Не более 5 контактов', {
                     title: 'Ошибка!',
                     autoHideDelay: 5000,
@@ -283,7 +285,7 @@ export default {
             setLicense: 'auth/SET_LICENSE',
             setAvatar: 'auth/SET_AVATAR'
         }),
-        
+
     },
 }
 </script>
