@@ -5,7 +5,7 @@
                 <b-col md="8" class="d-flex align-items-center">
                     <nuxt-link to="/" class="logo mr-4">EG</nuxt-link>
                     <div class="footer__info">
-                        <p>Служба поддержки: <a href="mailto:support@excursguide.ru"></a></p>
+                        <p>Служба поддержки: <a href="mailto:info@excursguide.ru">info@excursguide.ru</a></p>
                         <!-- <p>+7 (499) 950-15-50</p> -->
                         <a href="#" @click.prevent v-b-modal.prevent.modal-politic >Политика конфиденциальности</a>
                     </div>
